@@ -1,6 +1,10 @@
 {
   "name": "zziririt-front",
   "version": "0.1.0",
+  "description": "zziririt front project",
+  "main": "index.js",
+  "author": "moveuk",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
