@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Main({ data }) {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(30); // 페이지당 게시글 수
-
+  const navigate = useNavigate();
   const boardContent = data && data.content && data.content.content;
   const fetchPosts = async () => {
     try {
@@ -14,6 +15,10 @@ export default function Main({ data }) {
     } catch (error) {
       console.error('게시글을 불러오는데 실패했습니다.', error);
     }
+  };
+
+  const navigateToCreatePost = () => {
+    navigate("/createPost");
   };
 
   useEffect(() => {
@@ -44,7 +49,9 @@ export default function Main({ data }) {
               </button>
             </div>
             <div>
-              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 w-full bg-[#00b894] text-white">
+              <button
+                onClick={navigateToCreatePost}
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 w-full bg-[#00b894] text-white">
                 글쓰기
               </button>
             </div>

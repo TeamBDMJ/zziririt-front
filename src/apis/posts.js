@@ -1,4 +1,4 @@
-import { instance } from './axios';
+import { authInstance, instance } from './axios';
 
 export const getAllPosts = async () => {
   try {
@@ -26,7 +26,7 @@ export const getPost = async (boardId, postId) => {
 
 export const createPost = async (boardId, postData) => {
   try {
-    return await instance.post(`/api/v1/boards/${boardId}/posts`, postData);
+    return await authInstance.post(`/api/v1/boards/${boardId}/posts`, postData);
   } catch (error) {
     return error;
   }
