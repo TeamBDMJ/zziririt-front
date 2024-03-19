@@ -10,7 +10,10 @@ export default function CreatePost({ type = 'edit' }) {
 
   const onSubmitHandler = async () => {
     // 마크다운 형식
-    if (title == '') return;
+    if (title === '') {
+        alert("제목을 입력해주세요!")
+      return;
+    }
     const content = editorRef.current?.getInstance().getHTML();
     const privateStatus = false;
     const postData = {
@@ -22,7 +25,7 @@ export default function CreatePost({ type = 'edit' }) {
     console.log(content)
     console.log(postData)
     const res = await createPost(1, postData);
-    navigate('/');
+    navigate(-1);
   };
   const onExitHandler = () => {
     navigate(-1);

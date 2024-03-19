@@ -4,6 +4,7 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import '@toast-ui/editor/dist/i18n/ko-kr';
+import UploadImage from '../../infra/s3/UploadImage';
 
 export default function ToastEditor(props) {
   const { content, editorRef } = props;
@@ -13,6 +14,11 @@ export default function ToastEditor(props) {
   //   console.log(data);
   // };
 
+  const onUploadImage = async (blob, callback) => {
+    const url = await UploadImage("post", blob);
+    callback(url, 'alt text');
+    return false;
+  };
 
   const toolbarItems = [
     // 툴바 옵션 설정
@@ -38,6 +44,9 @@ export default function ToastEditor(props) {
         plugins={[colorSyntax]}
         language="ko-KR"
         // onChange={onChange}
+        hooks={{
+          addImageBlobHook: onUploadImage
+        }}
       />
     </div>
   );
