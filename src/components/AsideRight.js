@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { useState } from 'react';
 import PingPong from './PingPong';
 import Ad from './Ad';
 
@@ -8,7 +6,6 @@ export default function AsideRight() {
     <aside className="col-span-2">
       <div className="sticky top-4 space-y-4">
         <PingPong />
-
         <div className="bg-[#1a1a1a] p-4 rounded">
           <div className="mt-2 space-y-2">
             <div className="flex items-center justify-between bg-[#2d2d2d] p-2 rounded">

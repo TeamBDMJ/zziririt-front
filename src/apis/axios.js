@@ -7,12 +7,13 @@ export const authInstance = axios.create({
     'Access-Control-Allow-Credentials': true,
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 authInstance.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
-  const token = localStorage.getItem('accessToken');
-  console.log(`auth.accessToken:${token}`);
+  const token = localStorage.getItem('Authorization');
+  console.log(`Authorization:${token}`);
   config.headers.Authorization = `${token}`;
   return config;
 });

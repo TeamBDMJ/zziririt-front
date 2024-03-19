@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function Main({ data }) {
+export default function StreamerBoard({ data }) {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(30); // 페이지당 게시글 수
@@ -25,7 +25,7 @@ export default function Main({ data }) {
   };
 
   return (
-    <main>
+    <main className="col-span-6">
       <div className="space-y-4">
         <div className="grid grid-rows-2 bg-[#1a1a1a] p-4 rounded">
           <div className="flex justify-between">

@@ -1,6 +1,6 @@
 import { instance } from './axios';
 
-export const getStreamerBoars = async () => {
+export const getStreamerBoards = async () => {
   try {
     return await instance.get(`/api/v1/boards/streamer`);
   } catch (error) {

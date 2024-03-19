@@ -1,12 +1,18 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useEffect } from 'react';
+import { getAllPosts } from '../apis/posts';
 
 export default function AsideLeft({ setData }) {
+
+  useEffect(() => {
+    onClickAllPosts();
+  }, []);
   const onClickAllPosts = () => {
-    axios.get('/api/v1/boards/1/posts').then((response) => {
-      setData(response.data); // 받아온 데이터로 상태 업데이트
-      console.log(response.data);
-    });
+    const response = getAllPosts()
+    response.then((response) => {
+        setData(response.data);
+        console.log(response.data);
+      })
   };
   return (
     <aside className="col-span-2">
