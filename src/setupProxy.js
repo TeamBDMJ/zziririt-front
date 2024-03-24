@@ -1,17 +1,17 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function(app){
+module.exports = function (app) {
   app.use(
-    createProxyMiddleware( '/api/v1', {
+    createProxyMiddleware('/api/v1', {
       target: 'http://localhost:8080',
-      changeOrigin: true
+      changeOrigin: true,
     })
-  )
+  );
 
   app.use(
-    createProxyMiddleware( '/ping', {
+    createProxyMiddleware('/ping', {
       target: 'http://localhost:8080',
-      changeOrigin: true
+      changeOrigin: true,
     })
-  )
+  );
 };

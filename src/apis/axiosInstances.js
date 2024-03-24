@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const authInstance = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: 'http://localhost:3000',
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Credentials': true,
@@ -19,6 +19,5 @@ authInstance.interceptors.request.use((config) => {
 });
 
 export const instance = axios.create({
-  baseURL: 'http://localhost:8080',
-  withCredentials: true,
+  baseURL: 'http://localhost:3000'
 });

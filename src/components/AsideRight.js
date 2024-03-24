@@ -1,5 +1,5 @@
 import PingPong from './PingPong';
-import Ad from './Ad';
+import Ad from './common/rightSideBar/Ad';
 
 export default function AsideRight() {
   return (

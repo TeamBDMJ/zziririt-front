@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 
 function LoginPage() {
-
   return (
     <div
       className="min-h-screen items-center  text-center"
@@ -25,16 +24,16 @@ function LoginPage() {
 export default LoginPage;
 
 const NaverIdLogin = styled.div`
-    display: none;
+  display: none;
 `;
 
 const NaverLoginBtn = styled.a`
-    display: flex;
-    align-items: center;
-    width: 360px;
-    height: 56px;
-    background-color: #03c75a;
-    border-radius: 6px;
+  display: flex;
+  align-items: center;
+  width: 360px;
+  height: 56px;
+  background-color: #03c75a;
+  border-radius: 6px;
 `;
 
 // 로그인 버튼 사용가이드 링크를 들어가면 이미지를 받아 이렇게 적용이 가능하다 !

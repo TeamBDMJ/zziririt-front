@@ -23,8 +23,9 @@ export default function UploadImage(dir, file) {
       },
     });
 
-    return upload.promise()
+    return upload
+      .promise()
       .then((result) => result.Location)
       .catch((err) => console.log(err));
   }
-};
+}

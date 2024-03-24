@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 
-export default function NaverLoginRedirect({setIsLogin}) {
+function NaverLoginRedirect({ setIsLogin }) {
   function setAuthIntoLocalStorage() {
-    localStorage.clear();
     const urlParams = new URLSearchParams(window.location.search);
 
     for (const [key, value] of urlParams.entries()) {
@@ -12,7 +11,8 @@ export default function NaverLoginRedirect({setIsLogin}) {
   }
 
   useEffect(() => {
-    setAuthIntoLocalStorage()
+    setAuthIntoLocalStorage();
   }, []);
-
 }
+
+export default NaverLoginRedirect;

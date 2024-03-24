@@ -1,39 +1,33 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import PostRow from './features/post/PostRow';
 
-export default function StreamerBoard({ data }) {
+export default function OldBoard({ data }) {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(30); // 페이지당 게시글 수
-
+  const navigate = useNavigate();
   const boardContent = data && data.content && data.content.content;
-  const fetchPosts = async () => {
-    try {
-      const response = await axios.get('/api/v1/boards/1/posts');
-      setPosts(response.data); // API 응답 구조에 따라 조정이 필요할 수 있습니다.
-    } catch (error) {
-      console.error('게시글을 불러오는데 실패했습니다.', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts().then((r) => console.log(r));
-  }, []);
-  const onClickAllPostHandler = async () => {
-    // 로그인 정보를 초기화
-    console.log('전체글 불러오기 핸들러 작동');
-  };
+  // const fetchPosts = async () => {
+  //   try {
+  //     const response = await axios.get('/api/v1/boards/1/posts');
+  //     setPosts(response.data); // API 응답 구조에 따라 조정이 필요할 수 있습니다.
+  //   } catch (error) {
+  //     console.error('게시글을 불러오는데 실패했습니다.', error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchPosts().then((r) => console.log(r));
+  // }, []);
 
   return (
-    <main className="col-span-6">
+    <board>
       <div className="space-y-4">
         <div className="grid grid-rows-2 bg-[#1a1a1a] p-4 rounded">
           <div className="flex justify-between">
             <div className="flex space-x-2">
-              <button
-                onClick={fetchPosts}
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#00b894] text-white"
-              >
+              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#00b894] text-white">
                 전체
               </button>
               <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-white">
@@ -44,7 +38,10 @@ export default function StreamerBoard({ data }) {
               </button>
             </div>
             <div>
-              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 w-full bg-[#00b894] text-white">
+              <button
+                onClick={() => navigate('/createPost')}
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 w-full bg-[#00b894] text-white"
+              >
                 글쓰기
               </button>
             </div>
@@ -79,29 +76,12 @@ export default function StreamerBoard({ data }) {
               <div className="col-span-1 p-2">조회수</div>
             </div>
             {boardContent &&
-              boardContent.map((item, index) => (
-                <div
-                  className="grid grid-cols-10 gap-2 p-2 text-white"
-                  key={index}
-                  id={item.postId}
-                >
-                  <div className="col-span-1"></div>
-                  <div className="col-span-1"></div>
-                  <div className="col-span-5">{item.title}</div>
-                  <div
-                    className="col-span-1"
-                    key={item.memberId}
-                    id={item.memberId}
-                  >
-                    {item.nickname}
-                  </div>
-                  <div className="col-span-1">{item.createdAt}</div>
-                  <div className="col-span-1">{item.hit}</div>
-                </div>
+              boardContent.map((data, index) => (
+                <PostRow data={data} index={index} />
               ))}
           </div>
         </div>
       </div>
-    </main>
+    </board>
   );
 }

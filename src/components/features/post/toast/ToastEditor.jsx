@@ -4,7 +4,7 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import '@toast-ui/editor/dist/i18n/ko-kr';
-import UploadImage from '../../infra/s3/UploadImage';
+import UploadImage from '../../../../infra/s3/UploadImage';
 
 export default function ToastEditor(props) {
   const { content, editorRef } = props;
@@ -15,7 +15,7 @@ export default function ToastEditor(props) {
   // };
 
   const onUploadImage = async (blob, callback) => {
-    const url = await UploadImage("post", blob);
+    const url = await UploadImage('post', blob);
     callback(url, 'alt text');
     return false;
   };
@@ -45,7 +45,7 @@ export default function ToastEditor(props) {
         language="ko-KR"
         // onChange={onChange}
         hooks={{
-          addImageBlobHook: onUploadImage
+          addImageBlobHook: onUploadImage,
         }}
       />
     </div>
