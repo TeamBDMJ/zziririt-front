@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import CommentDiv from '../../components/features/post/detail/comment/CommentDiv';
 import ToastViewer from '../../components/features/post/toast/ToastViewer';
 import DetailPostTitle from '../../components/features/post/detail/DetailPostTitle';
-import BoardInfo from '../../components/features/board/BoardInfo';
 import { useLocation, useNavigate, useOutletContext, useParams } from 'react-router-dom';
-import { getAllPosts, getPost } from '../../apis/posts';
+import { getPost } from '../../apis/posts';
 
 function DetailPost() {
   const params = useParams();
@@ -18,6 +17,7 @@ function DetailPost() {
   useEffect(() => {
     getPost(boardId, postId).then((r) => {
       setPostData(r.content);
+      console.log(r.content);
     });
   }, [boardId, postId]);
 
@@ -26,7 +26,7 @@ function DetailPost() {
     <div>
       <DetailPostTitle category={category} title={postData.title} />
 
-      <ToastViewer contents={postData.content} />
+      <ToastViewer content={postData.content} />
 
       <div id="commentWrap">
         <CommentDiv data="댓글 내용" />

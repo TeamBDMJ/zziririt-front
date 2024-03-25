@@ -1,8 +1,20 @@
-import React from 'react';
-import { Viewer } from '@toast-ui/react-editor';
+import React, { useEffect } from 'react';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer';
 
-export default function ToastViewer({ contents }) {
-  console.log('string:', contents);
-  return <Viewer initialValue={contents || ''} />;
+export default function ToastViewer({ content }) {
+
+  const contentDetail = content
+
+  useEffect(() => {
+    const viewer = new Viewer({
+      el: document.querySelector('#viewer'),
+      initialValue: contentDetail,
+    });
+  }, [contentDetail]);
+
+  return (
+    <div id="viewer">
+    </div>
+  );
 }
