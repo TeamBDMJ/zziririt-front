@@ -9,7 +9,7 @@ function BoardInfo({ boardName, boardId }) {
     <div>
       <h1 className="text-4xl pl-4">{boardName}</h1>
       <div className="p-4">
-        <div className={(boardId === 'all') ? "hidden" : "flex justify-between"}>
+        <div className={(boardId === 'all') ? 'hidden' : 'flex justify-between'}>
           <BoardCategoryTab
             childBoards={['home', 'dummy1', 'dummy2', 'dummy3']}
           />
@@ -17,7 +17,13 @@ function BoardInfo({ boardName, boardId }) {
             <button
               onClick={() => {
                 if (localStorage.getItem('isLogin')) {
-                  navigate('./write');
+                  navigate('./write', {
+                      state: {
+                        boardName: boardName,
+                        boardId: boardId,
+                      },
+                    },
+                  );
                 } else {
                   navigate('/login');
                 }

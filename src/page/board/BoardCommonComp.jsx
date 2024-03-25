@@ -10,6 +10,7 @@ function BoardCommonComp() {
   // const [boardName, setBoardName] = useState(location.state.boardName);
   const boardId= location.state.boardId;
   const boardName = location.state.boardName;
+  const lastPostId = location.state.lastPostId;
   const [boardRowsData, setBoardRowsData] = useState();
   const [boardPage, setBoardPage] = useState(0);
   const [boardRowSize, setBoardRowSize] = useState(30);
@@ -37,7 +38,7 @@ function BoardCommonComp() {
   useEffect(() => {
     getBoardDataFromApi().then();
     console.log(boardRowsData);
-  }, [boardId, boardName]);
+  }, [boardId, boardName, lastPostId]);
 
   return (
     <div className="overflow-x-auto">

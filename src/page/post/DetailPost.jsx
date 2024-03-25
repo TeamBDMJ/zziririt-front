@@ -3,13 +3,15 @@ import CommentDiv from '../../components/features/post/detail/comment/CommentDiv
 import ToastViewer from '../../components/features/post/toast/ToastViewer';
 import DetailPostTitle from '../../components/features/post/detail/DetailPostTitle';
 import BoardInfo from '../../components/features/board/BoardInfo';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { getAllPosts, getPost } from '../../apis/posts';
 
 function DetailPost() {
   const params = useParams();
-  const boardId = params.boardId;
-  const postId = params.postId;
+  const location = useLocation()
+  const boardId = location.state.boardId;
+  const boardName = location.state.boardName;
+  const postId = location.state.postId;
   const navigate = useNavigate();
   const [postData, setPostData] = useState('');
 
@@ -22,7 +24,6 @@ function DetailPost() {
   const category = 'category';
   return (
     <div>
-      <BoardInfo />
       <DetailPostTitle category={category} title={postData.title} />
 
       <ToastViewer contents={postData.content} />

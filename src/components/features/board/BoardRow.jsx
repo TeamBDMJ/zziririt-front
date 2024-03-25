@@ -40,10 +40,10 @@ function BoardRow({ index, postData, boardId, boardGName }) {
   return (
     <tr key={index} id={postId}>
       <th>{zzirit}</th>
-      <td className={"cursor-pointer"} onClick={() => navigate(`${isNaN(boardId) ? "/g/all" : "/s/"+boardId}`, {
+      <td className={"cursor-pointer"} onClick={() => navigate(`${isNaN(boardId) ? "/g/"+boardId : "/s/"+boardId}`, {
         state: {
           boardId: boardId,
-          boardName: boardName,
+          boardName: boardGName,
           postId: postId,
         },
       })}>{boardName}</td>

@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { createPost } from '../../apis/posts';
 import ToastEditor from '../../components/features/post/toast/ToastEditor';
 import CheckBox from '../../components/features/post/write/CheckBox';
-import TextInput from '../../components/features/post/TextInput';
 import PostSelect from '../../components/features/post/write/PostSelect';
 import PostTitleInput from '../../components/features/post/write/PostTitleInput';
 
@@ -11,6 +10,10 @@ export default function WritePost({ type = 'edit' }) {
   const [title, setTitle] = useState('');
   const editorRef = useRef();
   const navigate = useNavigate();
+  const location = useLocation();
+  const boardId = location.state.boardId;
+  const boardName = location.state.boardName;
+  const postId = location.state.postId;
 
   const onSubmitHandler = async () => {
     // 마크다운 형식
@@ -25,11 +28,13 @@ export default function WritePost({ type = 'edit' }) {
       content,
       privateStatus,
     };
-    console.log(title);
-    console.log(content);
-    console.log(postData);
-    const res = await createPost(1, postData);
-    navigate(-1);
+    const res = await createPost(boardId, postData);
+    navigate(`${isNaN(boardId) ? "/g/"+boardId : "/s/"+boardId}`, {
+      state: {
+        boardId: boardId,
+        boardName: boardName,
+        lastPostId: res.data.content.postId
+      }});
   };
   const onExitHandler = () => {
     navigate(-1);

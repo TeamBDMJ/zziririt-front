@@ -21,13 +21,13 @@ function Router() {
         <Route path="/*" element={<CommonComponent />}>
           <Route path="g/:boardId/*" element={<BoardCommonComp />}>
             <Route path="" element={<BoardTable />} />
-            <Route path=":boardId/:postId" element={<DetailPost />} />
-            <Route path=":boardId/write" element={<WritePost />} />
+            <Route path=":postId" element={<DetailPost />} />
+            <Route path="write" element={<WritePost />} />
           </Route>
           <Route path="s/:streamerId/*" element={<BoardCommonComp />}>
             <Route path="" element={<BoardTable/>} />
-            <Route path=":streamerId/:postId" element={<DetailPost />} />
-            <Route path=":streamerId/write" element={<WritePost />} />
+            <Route path=":postId" element={<DetailPost />} />
+            <Route path="write" element={<WritePost />} />
           </Route>
           <Route path="streamer" element={<Streamers />}></Route>
         </Route>
