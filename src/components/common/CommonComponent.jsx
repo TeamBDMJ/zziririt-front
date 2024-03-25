@@ -8,12 +8,11 @@ import React, { useState } from 'react';
 
 function CommonComponent() {
   const location = useLocation();
-  const [streamerBoardId, setStreamerBoardId] = useState()
   const checkMain = () => {
     if (location.pathname === '/') {
       return <Home />;
     } else {
-      return <Outlet context={streamerBoardId}/>;
+      return <Outlet />;
     }
   };
 

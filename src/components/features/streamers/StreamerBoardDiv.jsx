@@ -6,7 +6,7 @@ function StreamerBoardDiv({ boardId, href, streamerNickname }) {
     navigate(`${href}`, {
       state: {
         boardId: boardId,
-        streamerNickname: streamerNickname,
+        boardName: streamerNickname,
       },
     });
   };

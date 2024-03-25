@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { format, formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
-function BoardRow({ index, postData }) {
+function BoardRow({ index, postData, boardId, boardGName }) {
   const {
     postId,
     zzirit,
@@ -40,8 +40,20 @@ function BoardRow({ index, postData }) {
   return (
     <tr key={index} id={postId}>
       <th>{zzirit}</th>
-      <td>{boardName}</td>
-      <td onClick={() => navigate(`./${postId}`)}>{title}</td>
+      <td className={"cursor-pointer"} onClick={() => navigate(`${isNaN(boardId) ? "/g/all" : "/s/"+boardId}`, {
+        state: {
+          boardId: boardId,
+          boardName: boardName,
+          postId: postId,
+        },
+      })}>{boardName}</td>
+      <td className={"cursor-pointer"} onClick={() => navigate(`./${postId}`, {
+        state: {
+          boardId: boardId,
+          boardName: boardGName,
+          postId: postId,
+        },
+      })}>{title}</td>
       <td key={memberId} id={memberId}>
         {nickname}
       </td>

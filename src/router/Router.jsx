@@ -7,10 +7,10 @@ import BoardCommonComp from '../page/board/BoardCommonComp';
 import LoginPage from '../page/login/LoginPage';
 import NaverLoginRedirect from '../page/login/AuthLoginRedirect';
 import Profile from '../page/profile/Profile';
-import OldBoard from '../components/OldBoard';
 import Streamers from '../page/streamer/Streamers';
 import WritePost from '../page/post/WritePost';
 import DetailPost from '../page/post/DetailPost';
+import BoardTable from '../page/board/BoardTable';
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
@@ -18,27 +18,25 @@ function Router() {
     <BrowserRouter>
       <HeaderDaisy isLogin={isLogin} setIsLogin={setIsLogin} />
       <Routes>
-        <Route path="/" element={<CommonComponent />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/*" element={<CommonComponent />}>
+          <Route path="g/:boardId/*" element={<BoardCommonComp />}>
+            <Route path="" element={<BoardTable />} />
+            <Route path=":boardId/:postId" element={<DetailPost />} />
+            <Route path=":boardId/write" element={<WritePost />} />
+          </Route>
+          <Route path="s/:streamerId/*" element={<BoardCommonComp />}>
+            <Route path="" element={<BoardTable/>} />
+            <Route path=":streamerId/:postId" element={<DetailPost />} />
+            <Route path=":streamerId/write" element={<WritePost />} />
+          </Route>
+          <Route path="streamer" element={<Streamers />}></Route>
+        </Route>
         <Route
           path="/naverLogin"
           element={<NaverLoginRedirect setIsLogin={setIsLogin} />}
         />
         <Route path="/myProfile" element={<Profile isLogin={isLogin} />} />
-        <Route path="/g/*" element={<CommonComponent />}>
-          <Route path=":boardId" element={<BoardCommonComp />} />
-          <Route path=":boardId/:postId" element={<DetailPost />} />
-          <Route path=":boardId/write" element={<WritePost />} />
-          <Route path="ol" element={<OldBoard />} />
-        </Route>
-        <Route path="/streamer" element={<CommonComponent />}>
-          <Route path="" element={<Streamers />} />
-        </Route>
-        <Route path="/s/*" element={<CommonComponent />}>
-          <Route path=":streamerId" element={<BoardCommonComp />} />
-          <Route path=":streamerId/:postId" element={<DetailPost />} />
-          <Route path=":streamerId/write" element={<WritePost />} />
-        </Route>
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
       <FooterDaisy />
     </BrowserRouter>

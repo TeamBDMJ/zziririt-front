@@ -49,6 +49,18 @@ export const getPost = async (boardId, postId) => {
   }
 };
 
+export const searchPost = async () => {
+  try {
+    const response = await instance.get(
+      `/api/v1/boards/search/posts/`
+    );
+    return response.data;
+  } catch (error) {
+    console.error('getPost-게시글을 불러오는데 실패했습니다.', error);
+    return error;
+  }
+};
+
 export const createPost = async (boardId, postData) => {
   try {
     return await authInstance.post(`/api/v1/boards/${boardId}/posts`, postData);

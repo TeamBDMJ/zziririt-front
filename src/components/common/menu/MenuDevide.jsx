@@ -49,6 +49,40 @@ function MenuDevide({ title }) {
             icon={MenuIconInfo()}
             menuName="스트리머 게시판"
           />
+        </ul>
+      </li>
+      <li>
+        <h2 className="menu-title p-4">  </h2>
+        <ul>
+          <MenuRow
+            onClick={() => {
+              navigate('/g/announcement', {
+                state: {
+                  boardId: 2,
+                  boardName: "공지사항",
+                },
+              });
+            }
+            }
+            icon={MenuIconInfo()}
+            menuName="공지사항"
+          />
+          <MenuRow
+            onClick={() => {
+              navigate('/iconShop');
+            }
+            }
+            icon={MenuIconInfo()}
+            menuName="아이콘샵"
+          />
+          <MenuRow
+            onClick={() => {
+              navigate('/event');
+            }
+            }
+            icon={MenuIconInfo()}
+            menuName="이벤트"
+          />
           {/*<MenuRow*/}
           {/*  onClick={() => navigate('/g/ad')}*/}
           {/*  icon={MenuIconInfo()}*/}

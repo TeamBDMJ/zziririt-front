@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function LoginStatusButton({ isLogin, setIsLogin }) {
+  const navigate = useNavigate();
   useEffect(() => {
     const accessToken = localStorage.getItem('Authorization');
     setIsLogin(!!accessToken);
@@ -8,7 +10,9 @@ function LoginStatusButton({ isLogin, setIsLogin }) {
 
   const onLogoutHandler = () => {
     localStorage.removeItem('Authorization');
-    window.location.reload();
+    localStorage.removeItem('isLogin');
+    setIsLogin(false)
+    navigate('/');
   };
 
   return (
