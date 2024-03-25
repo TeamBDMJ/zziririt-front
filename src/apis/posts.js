@@ -8,7 +8,10 @@ export const getAllPosts = async (page, size) => {
     if (size === null || size === undefined || size < 0 || size > 100) {
       size = 30;
     }
-    const response = await instance.get(`/api/v1/boards/allposts?page=${page}&size=${size}`);
+    const response = await instance.get(
+      `/api/v1/boards/allposts?page=${page}&size=${size}`
+    );
+    console.log("getAllPosts 요청")
     return response.data;
   } catch (error) {
     console.error('getAllPosts-게시글을 불러오는데 실패했습니다.', error);
@@ -18,8 +21,15 @@ export const getAllPosts = async (page, size) => {
 
 export const getPosts = async (boardId, searchType, searchTerm, page, size) => {
   try {
-    const url = generateUrl(`/api/v1/boards/${boardId}/posts`, searchType, searchTerm, page, size);
+    const url = generateUrl(
+      `/api/v1/boards/${boardId}/posts`,
+      searchType,
+      searchTerm,
+      page,
+      size
+    );
     const response = await instance.get(url);
+    console.log(`getPosts ${boardId}번 보드 요청`)
     return response.data;
   } catch (error) {
     console.error('getPosts-게시글을 불러오는데 실패했습니다.', error);
@@ -29,7 +39,9 @@ export const getPosts = async (boardId, searchType, searchTerm, page, size) => {
 
 export const getPost = async (boardId, postId) => {
   try {
-    const response = await instance.get(`/api/v1/boards/${boardId}/posts/${postId}`);
+    const response = await instance.get(
+      `/api/v1/boards/${boardId}/posts/${postId}`
+    );
     return response.data;
   } catch (error) {
     console.error('getPost-게시글을 불러오는데 실패했습니다.', error);
@@ -48,7 +60,8 @@ export const createPost = async (boardId, postData) => {
 
 function generateUrl(baseUrl, searchType, searchTerm, page, size) {
   let url = baseUrl;
-  if (!(typeof searchType === 'undefined' || typeof searchType == null) ||
+  if (
+    !(typeof searchType === 'undefined' || typeof searchType == null) ||
     !(typeof searchTerm === 'undefined' || typeof searchTerm == null) ||
     !(typeof page === 'undefined' || typeof page == null) ||
     !(typeof size === 'undefined' || typeof size == null)
@@ -66,7 +79,7 @@ function generateUrl(baseUrl, searchType, searchTerm, page, size) {
     if (!(typeof size === 'undefined' || typeof size == null)) {
       url += `size=${size}&`;
     }
-    return url
+    return url;
   } else {
     return url;
   }

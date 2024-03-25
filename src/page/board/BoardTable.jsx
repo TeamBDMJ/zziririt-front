@@ -2,46 +2,44 @@ import BoardRow from '../../components/features/board/BoardRow';
 import Pagination from '../../components/features/post/Pagination';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getAllPosts, getPosts } from '../../apis/posts';
 
 function BoardTable() {
-  const params = useParams();
-  const boardId = params.boardId;
-  const streamerId = params.streamerId;
-  const navigate = useNavigate();
-  const [boardRowsData, setBoardRowsData] = useState([]);
+  const location = useLocation();
+  const boardId = location.state.boardId;
+  const boardName = location.state.boardName;
+  console.log(boardId,"   ", boardName)
+  const [boardRowsData, setBoardRowsData] = useState();
   const [boardPage, setBoardPage] = useState(0);
   const [boardRowSize, setBoardRowSize] = useState(30);
-  const fetchPosts = async () => {
-    try {
-      const response = await axios.get('/api/v1/boards/1/posts');
-      setBoardRowsData(response.data);
-    } catch (error) {
-      console.error('게시글을 불러오는데 실패했습니다.', error);
-    }
-  };
+
   const getBoardDataFromApi = async () => {
+    let data = undefined;
     switch (boardId) {
       case 'all':
-        setBoardRowsData(await getAllPosts(boardPage, boardRowSize));
+        data = (await getAllPosts(boardPage, boardRowSize));
         break;
       case 'popular':
-        setBoardRowsData(await getAllPosts(boardPage, boardRowSize));
+        data = (await getAllPosts(boardPage, boardRowSize));
         break;
       case 'announcement':
-        setBoardRowsData(await getPosts(2));
+        data = (await getPosts(2));
         break;
       default:
-        setBoardRowsData(await getPosts(3));
+        console.log(`default: ${boardId} ${boardName}`)
+        data = (await getPosts(boardId));
         break;
     }
+    setBoardRowsData(data); // 함수형 업데이트 사용
   };
 
   useEffect(() => {
     getBoardDataFromApi().then();
-  }, []);
-  const boardContent = boardRowsData && boardRowsData.content && boardRowsData.content.content;
+  }, [boardId, boardName]);
+
+  const boardContent =
+    boardRowsData && boardRowsData.content && boardRowsData.content.content;
   return (
     <div>
       <table className="table table-xs">

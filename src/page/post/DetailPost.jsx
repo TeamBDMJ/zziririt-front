@@ -14,10 +14,9 @@ function DetailPost() {
   const [postData, setPostData] = useState('');
 
   useEffect(() => {
-    getPost(boardId, postId).then(r => {
-      setPostData(r.content)
-    })
-
+    getPost(boardId, postId).then((r) => {
+      setPostData(r.content);
+    });
   }, [boardId, postId]);
 
   const category = 'category';
@@ -27,7 +26,6 @@ function DetailPost() {
       <DetailPostTitle category={category} title={postData.title} />
 
       <ToastViewer contents={postData.content} />
-
 
       <div id="commentWrap">
         <CommentDiv data="댓글 내용" />

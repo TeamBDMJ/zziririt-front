@@ -1,16 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 
-function StreamerBoardDiv({ boardId, href, streamerName }) {
-  const navigate = useNavigate()
+function StreamerBoardDiv({ boardId, href, streamerNickname }) {
+  const navigate = useNavigate();
   const onTitleClickHandler = () => {
-    navigate(`/s/${href}`, {
+    navigate(`${href}`, {
       state: {
-        boardId: boardId
-      }
-    })
+        boardId: boardId,
+        streamerNickname: streamerNickname,
+      },
+    });
   };
-  <a onClick={onTitleClickHandler}>{streamerName}</a>;
-  return <Link to="경로">링크명</Link>
+
+  return <a onClick={onTitleClickHandler}>{streamerNickname}</a>;
 }
 
 export default StreamerBoardDiv;

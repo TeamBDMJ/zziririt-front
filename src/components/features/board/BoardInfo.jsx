@@ -1,16 +1,13 @@
-import BoardRow from './BoardRow';
-import Pagination from '../post/Pagination';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import BoardCategoryTab from './tab/BoardCategoryTab';
 import SearchJoin from './SearchJoin';
 import { useNavigate } from 'react-router-dom';
 
-function BoardInfo({ boardTitle, boardId }) {
+function BoardInfo({ boardName, boardId }) {
   const navigate = useNavigate();
   return (
     <div>
-      <h1 className="text-4xl pl-4">Board 제목 : {boardTitle}</h1>
+      <h1 className="text-4xl pl-4">{boardName}</h1>
       <div className="p-4">
         <div className="flex justify-between">
           <BoardCategoryTab

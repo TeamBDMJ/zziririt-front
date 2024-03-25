@@ -58,11 +58,15 @@ export default function WritePost({ type = 'edit' }) {
         <div className="flex-1"></div>
         <button
           className="btn btn-accent rounded-md m-1"
-          onClick={onExitHandler}>나가기
+          onClick={onExitHandler}
+        >
+          나가기
         </button>
         <button
           className="btn btn-primary rounded-md m-1"
-          onClick={onSubmitHandler}>제출하기
+          onClick={onSubmitHandler}
+        >
+          제출하기
         </button>
       </div>
     </div>

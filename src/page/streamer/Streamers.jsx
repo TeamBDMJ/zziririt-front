@@ -15,16 +15,15 @@ function sortStreamers(streamers) {
 }
 
 function Streamers({ setStreamerBoardId }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [streamersData, setStreamersData] = useState([]);
 
   useEffect(() => {
-    getStreamerBoards().then(r => {
+    getStreamerBoards().then((r) => {
       const stData = sortStreamers(r.content);
       setStreamersData(stData);
     });
   }, []);
-
 
   return (
     <div key="streamer">
@@ -34,7 +33,7 @@ function Streamers({ setStreamerBoardId }) {
             key={streamer.boardUrl}
             boardId={streamer.boardId}
             href={`/s/${streamer.boardUrl}`}
-            streamerName={streamer.streamerNickname}
+            streamerNickname={streamer.streamerNickname}
           />
         </div>
       ))}
