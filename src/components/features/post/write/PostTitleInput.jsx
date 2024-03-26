@@ -1,4 +1,5 @@
-function PostTitleInput({ placeholder, onChange }) {
+function PostTitleInput({ placeholder, onChange, value }) {
+
   return (
     <label className="form-control w-full">
       <input
@@ -6,6 +7,7 @@ function PostTitleInput({ placeholder, onChange }) {
         type="text"
         placeholder={placeholder}
         className="input input-bordered w-full"
+        value={value}
       />
     </label>
   );

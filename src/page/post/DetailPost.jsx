@@ -6,7 +6,6 @@ import { useLocation, useNavigate, useOutletContext, useParams } from 'react-rou
 import { deletePost, getPost } from '../../apis/posts';
 
 function DetailPost() {
-  const params = useParams();
   const location = useLocation();
   const boardId = location.state.boardId;
   const boardName = location.state.boardName;
@@ -30,7 +29,8 @@ function DetailPost() {
         state: {
           boardId: boardId,
           boardName: boardName,
-          lastPostId: postData.postId,
+          postId: postId,
+          postData: postData
         },
       },
     );
@@ -42,7 +42,7 @@ function DetailPost() {
       state: {
         boardId: boardId,
         boardName: boardName,
-        lastPostId: 0,
+        lastPostId: postData.postId,
       },
     });
   };

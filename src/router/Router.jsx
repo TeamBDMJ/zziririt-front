@@ -11,6 +11,7 @@ import Streamers from '../page/streamer/Streamers';
 import WritePost from '../page/post/WritePost';
 import DetailPost from '../page/post/DetailPost';
 import BoardTable from '../page/board/BoardTable';
+import UpdatePost from '../page/post/UpdatePost';
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
@@ -23,11 +24,13 @@ function Router() {
             <Route path="" element={<BoardTable />} />
             <Route path=":postId" element={<DetailPost />} />
             <Route path="write" element={<WritePost />} />
+            <Route path=":postId/update" element={<UpdatePost />} />
           </Route>
           <Route path="s/:streamerId/*" element={<BoardCommonComp />}>
             <Route path="" element={<BoardTable/>} />
             <Route path=":postId" element={<DetailPost />} />
             <Route path="write" element={<WritePost />} />
+            <Route path=":postId/update" element={<UpdatePost />} />
           </Route>
           <Route path="streamer" element={<Streamers />}></Route>
         </Route>

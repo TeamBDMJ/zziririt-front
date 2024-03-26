@@ -9,11 +9,6 @@ import UploadImage from '../../../../infra/s3/UploadImage';
 export default function ToastEditor(props) {
   const { content, editorRef } = props;
 
-  // const onChange = () => {
-  //   const data = editorRef.current.getInstance().getHTML();
-  //   console.log(data);
-  // };
-
   const onUploadImage = async (blob, callback) => {
     const url = await UploadImage('post', blob);
     callback(url, 'alt text');

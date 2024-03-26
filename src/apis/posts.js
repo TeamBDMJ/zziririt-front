@@ -85,7 +85,7 @@ export const updatePost = async (boardId, postId, postData) => {
   try {
     return await authInstance.put(`/api/v1/boards/${boardId}/posts/${postId}`, postData);
   } catch (error) {
-    console.error('updatePost-게시글 삭제에 실패했습니다.', error);
+    console.error('updatePost-게시글 수정에 실패했습니다.', error);
     return error;
   }
 };
