@@ -20,16 +20,13 @@ function BoardCommonComp() {
     let data = undefined;
     switch (boardId) {
       case 'all':
-        data = (await getAllPosts(boardPage, boardRowSize));
+        data = (await getAllPosts(localStorage.getItem("isLogin"), boardPage, boardRowSize));
         break;
-      case 'popular':
-        data = (await getAllPosts(boardPage, boardRowSize));
-        break;
-      case 'announcement':
-        data = (await getPosts(2));
-        break;
+      // case 'popular':
+      //   data = (await getPopularPosts(localStorage.getItem("isLogin")));
+      //   break;
       default:
-        data = (await getPosts(boardId));
+        data = (await getPosts(localStorage.getItem("isLogin"), boardId, boardPage, boardRowSize));
         break;
     }
     setBoardRowsData(data); // 함수형 업데이트 사용
