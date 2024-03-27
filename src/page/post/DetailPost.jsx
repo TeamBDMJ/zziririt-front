@@ -103,14 +103,11 @@ function DetailPost() {
         </div>
       </div>
 
-      <div id="commentWrap">
-        <CommentDiv data="댓글 내용" />
-        <CommentDiv data="댓글 내용2" />
-        <CommentDiv data="댓글 내용3" />
-        <CommentDiv data="댓글 내용4" />
-      </div>
+      <div id="commentWrap" className="border-gray-100 border-4 p-2 mb-10">
+        <CommentDiv data="댓글 내용(개발중)" />
 
-      <div>댓글 작성창</div>
+        <div className="p-10 border-gray-100 border-2">댓글 작성창(개발중)</div>
+      </div>
     </div>
   );
 }

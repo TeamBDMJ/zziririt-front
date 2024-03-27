@@ -1,5 +1,5 @@
 function CommentDiv({ data }) {
-  return <div>{data}</div>;
+  return <div className="p-8">{data}</div>;
 }
 
 export default CommentDiv;

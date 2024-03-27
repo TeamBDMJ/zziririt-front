@@ -7,7 +7,7 @@ function BoardInfo({ boardName, boardId }) {
   const navigate = useNavigate();
   return (
     <div>
-      <h1 className="text-4xl pl-4">{boardName}</h1>
+      <h1 className="text-4xl font-bold pl-4">{boardName}</h1>
       <div className="p-4">
         <div className={boardId === 'all' ? 'hidden' : 'flex justify-between'}>
           {/*<BoardCategoryTab*/}
