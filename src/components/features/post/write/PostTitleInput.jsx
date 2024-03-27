@@ -1,5 +1,4 @@
 function PostTitleInput({ placeholder, onChange, value }) {
-
   return (
     <label className="form-control w-full">
       <input

@@ -12,6 +12,7 @@ import WritePost from '../page/post/WritePost';
 import DetailPost from '../page/post/DetailPost';
 import BoardTable from '../page/board/BoardTable';
 import UpdatePost from '../page/post/UpdatePost';
+import HealthCheck from '../page/HealthCheck';
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
@@ -27,7 +28,7 @@ function Router() {
             <Route path=":postId/update" element={<UpdatePost />} />
           </Route>
           <Route path="s/:streamerId/*" element={<BoardCommonComp />}>
-            <Route path="" element={<BoardTable/>} />
+            <Route path="" element={<BoardTable />} />
             <Route path=":postId" element={<DetailPost />} />
             <Route path="write" element={<WritePost />} />
             <Route path=":postId/update" element={<UpdatePost />} />
@@ -40,6 +41,7 @@ function Router() {
         />
         <Route path="/myProfile" element={<Profile isLogin={isLogin} />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/health" element={<HealthCheck />} />
       </Routes>
       <FooterDaisy />
     </BrowserRouter>

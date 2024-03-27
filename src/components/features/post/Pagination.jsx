@@ -1,10 +1,25 @@
 import { useState } from 'react';
 
-function Pagination({ currentPage, page, totalPosts, limit, setPage }) {
-  const numPages = Math.ceil(totalPosts / limit);
-  const [currPage, setCurrPage] = useState(page);
-  let firstNum = currPage - (currPage % 5) + 1;
-  let lastNum = currPage - (currPage % 5) + 5;
+function Pagination({
+  pageable,
+  page,
+  totalPages,
+  totalPosts,
+  limit,
+  setPage,
+}) {
+  // const numPages = Math.ceil(totalPosts / limit);
+  // const [currPage, setCurrPage] = useState(page);
+  // let firstNum = currPage - (currPage % 5) + 1;
+  // let lastNum = currPage - (currPage % 5) + 5;
+
+  // const maximumPages = () => {
+  //   if (totalPages > 10) {
+  //     return 10;
+  //   } else {
+  //     return totalPages;
+  //   }
+  // };
 
   return (
     <div className="join">

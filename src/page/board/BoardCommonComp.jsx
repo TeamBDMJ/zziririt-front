@@ -8,7 +8,7 @@ function BoardCommonComp() {
   const navigate = useNavigate();
   // const [boardId, setBoardId] = useState(location.state.boardId);
   // const [boardName, setBoardName] = useState(location.state.boardName);
-  const boardId= location.state.boardId;
+  const boardId = location.state.boardId;
   const boardName = location.state.boardName;
   const lastPostId = location.state.lastPostId;
   const [boardRowsData, setBoardRowsData] = useState();
@@ -20,13 +20,22 @@ function BoardCommonComp() {
     let data = undefined;
     switch (boardId) {
       case 'all':
-        data = (await getAllPosts(localStorage.getItem("isLogin"), boardPage, boardRowSize));
+        data = await getAllPosts(
+          localStorage.getItem('isLogin'),
+          boardPage,
+          boardRowSize
+        );
         break;
       // case 'popular':
       //   data = (await getPopularPosts(localStorage.getItem("isLogin")));
       //   break;
       default:
-        data = (await getPosts(localStorage.getItem("isLogin"), boardId, boardPage, boardRowSize));
+        data = await getPosts(
+          localStorage.getItem('isLogin'),
+          boardId,
+          boardPage,
+          boardRowSize
+        );
         break;
     }
     setBoardRowsData(data); // 함수형 업데이트 사용
@@ -45,8 +54,9 @@ function BoardCommonComp() {
           boardRowsData,
           boardId,
           boardName,
-          boardPage
-        }} />
+          boardPage,
+        }}
+      />
     </div>
   );
 }

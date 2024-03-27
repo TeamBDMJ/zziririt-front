@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function MenuDevide({ title }) {
   const navigate = useNavigate();
 
-  const menuList = []
+  const menuList = [];
 
   return (
     <ul className="menu bg-base-200 w-auto rounded-box">
@@ -22,12 +22,11 @@ function MenuDevide({ title }) {
             onClick={() => {
               navigate('/g/all', {
                 state: {
-                  boardId: "all",
-                  boardName: "전체 글 보기",
+                  boardId: 'all',
+                  boardName: '전체 글 보기',
                 },
               });
-            }
-            }
+            }}
             icon={MenuIconInfo()}
             menuName="전체 글 보기"
           />
@@ -36,11 +35,10 @@ function MenuDevide({ title }) {
               navigate('/g/fb', {
                 state: {
                   boardId: 1,
-                  boardName: "자유 게시판",
+                  boardName: '자유 게시판',
                 },
               });
-            }
-            }
+            }}
             icon={MenuIconInfo()}
             menuName="자유 게시판"
           />
@@ -52,34 +50,31 @@ function MenuDevide({ title }) {
         </ul>
       </li>
       <li>
-        <h2 className="menu-title p-4">  </h2>
+        <h2 className="menu-title p-4"> </h2>
         <ul>
           <MenuRow
             onClick={() => {
               navigate('/g/announcement', {
                 state: {
                   boardId: 2,
-                  boardName: "공지사항",
+                  boardName: '공지사항',
                 },
               });
-            }
-            }
+            }}
             icon={MenuIconInfo()}
             menuName="공지사항"
           />
           <MenuRow
             onClick={() => {
               navigate('/iconShop');
-            }
-            }
+            }}
             icon={MenuIconInfo()}
             menuName="아이콘샵"
           />
           <MenuRow
             onClick={() => {
               navigate('/event');
-            }
-            }
+            }}
             icon={MenuIconInfo()}
             menuName="이벤트"
           />

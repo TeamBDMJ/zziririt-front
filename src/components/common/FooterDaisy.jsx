@@ -83,7 +83,6 @@ export default function FooterDaisy() {
           </a>
         </div>
       </nav>
-      <PingPong />
     </footer>
   );
 }

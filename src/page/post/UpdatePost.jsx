@@ -39,14 +39,15 @@ function UpdatePost() {
       privateStatus,
     };
     const res = await updatePost(boardId, postId, postData);
-    console.log(res)
+    console.log(res);
 
     navigate(-1, {
       state: {
         boardId: boardId,
         boardName: boardName,
-        lastPostId: res.data
-      }});
+        lastPostId: res.data,
+      },
+    });
   };
   const onExitHandler = () => {
     navigate(-1);
@@ -75,7 +76,11 @@ function UpdatePost() {
         />
       </div>
       <div className="flex flex-row-reverse">
-        <CheckBox onChange={onChangePrivateStatusHandler} checked={oldPostData.privateStatus} text={'비밀글 작성'} />
+        <CheckBox
+          onChange={onChangePrivateStatusHandler}
+          checked={oldPostData.privateStatus}
+          text={'비밀글 작성'}
+        />
       </div>
       <div>
         <ToastEditor editorRef={editorRef} content={oldPostData.content} />

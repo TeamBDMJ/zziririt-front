@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 function LoginPage() {
+  const naverLoginUrl = process.env.REACT_APP_API_URL;
   return (
     <div
       className="min-h-screen items-center  text-center"
@@ -12,7 +13,7 @@ function LoginPage() {
     >
       <div className="flex justify-center">
         <NaverIdLogin id="naverIdLogin" />
-        <NaverLoginBtn href="http://localhost:8080/api/v1/oauth2/login/naver">
+        <NaverLoginBtn href={`${naverLoginUrl}/api/v1/oauth2/login/naver`}>
           <NaverIcon alt="navericon" />
           <NaverLoginTitle>네이버로 로그인</NaverLoginTitle>
         </NaverLoginBtn>

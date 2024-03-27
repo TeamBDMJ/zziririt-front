@@ -11,7 +11,7 @@ function LoginStatusButton({ isLogin, setIsLogin }) {
   const onLogoutHandler = () => {
     localStorage.removeItem('Authorization');
     localStorage.removeItem('isLogin');
-    setIsLogin(false)
+    setIsLogin(false);
     navigate('/');
   };
 

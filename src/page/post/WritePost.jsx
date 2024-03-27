@@ -29,12 +29,13 @@ export default function WritePost({ type = 'edit' }) {
       privateStatus,
     };
     const res = await createPost(boardId, postData);
-    navigate(`${isNaN(boardId) ? "/g/"+boardId : "/s/"+boardId}`, {
+    navigate(`${isNaN(boardId) ? '/g/' + boardId : '/s/' + boardId}`, {
       state: {
         boardId: boardId,
         boardName: boardName,
-        lastPostId: res.data.content.postId
-      }});
+        lastPostId: res.data.content.postId,
+      },
+    });
   };
   const onExitHandler = () => {
     navigate(-1);
@@ -45,8 +46,8 @@ export default function WritePost({ type = 'edit' }) {
   };
 
   const onChangePrivateStatusHandler = (e) => {
-    console.log("e.target.checked")
-    console.log(e.target.checked)
+    console.log('e.target.checked');
+    console.log(e.target.checked);
     if (e.target.checked) {
       setPrivateStatus(true);
     } else {
@@ -64,7 +65,11 @@ export default function WritePost({ type = 'edit' }) {
         />
       </div>
       <div className="flex flex-row-reverse">
-        <CheckBox onChange={onChangePrivateStatusHandler} checked={false} text={'비밀글 작성'} />
+        <CheckBox
+          onChange={onChangePrivateStatusHandler}
+          checked={false}
+          text={'비밀글 작성'}
+        />
       </div>
       <div>
         <ToastEditor editorRef={editorRef} />

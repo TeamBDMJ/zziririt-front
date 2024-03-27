@@ -4,8 +4,6 @@ import { format, formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
 function BoardRow({ index, postData, boardId, boardGName }) {
-  console.log("postDatapostDatapostDatapostDatapostDatapostDatapostDatapostData")
-  console.log(postData)
   const {
     postId,
     zzirit,
@@ -42,7 +40,6 @@ function BoardRow({ index, postData, boardId, boardGName }) {
   }
 
   function onClickDetailPostHandler() {
-
     if (permissionToRead) {
       navigate(`./${postId}`, {
         state: {
@@ -52,21 +49,29 @@ function BoardRow({ index, postData, boardId, boardGName }) {
         },
       });
     } else {
-      alert("글을 읽을 권한이 없습니다.")
+      alert('글을 읽을 권한이 없습니다.');
     }
-
   }
   return (
     <tr key={index} id={postId}>
       <th>{zzirit}</th>
-      <td className={"cursor-pointer"} onClick={() => navigate(`${isNaN(boardId) ? "/g/"+boardId : "/s/"+boardId}`, {
-        state: {
-          boardId: boardId,
-          boardName: boardGName,
-          postId: postId,
-        },
-      })}>{boardName}</td>
-      <td className={"cursor-pointer"} onClick={onClickDetailPostHandler}>{title}</td>
+      <td
+        className={'cursor-pointer'}
+        onClick={() =>
+          navigate(`${isNaN(boardId) ? '/g/' + boardId : '/s/' + boardId}`, {
+            state: {
+              boardId: boardId,
+              boardName: boardGName,
+              postId: postId,
+            },
+          })
+        }
+      >
+        {boardName}
+      </td>
+      <td className={'cursor-pointer'} onClick={onClickDetailPostHandler}>
+        {title}
+      </td>
       <td key={memberId} id={memberId}>
         {nickname}
       </td>

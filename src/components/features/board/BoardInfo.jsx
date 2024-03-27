@@ -9,21 +9,21 @@ function BoardInfo({ boardName, boardId }) {
     <div>
       <h1 className="text-4xl pl-4">{boardName}</h1>
       <div className="p-4">
-        <div className={(boardId === 'all') ? 'hidden' : 'flex justify-between'}>
-          <BoardCategoryTab
-            childBoards={['home', 'dummy1', 'dummy2', 'dummy3']}
-          />
+        <div className={boardId === 'all' ? 'hidden' : 'flex justify-between'}>
+          {/*<BoardCategoryTab*/}
+          {/*  childBoards={['home', 'dummy1', 'dummy2', 'dummy3']}*/}
+          {/*/>*/}
+          <div></div>
           <div>
             <button
               onClick={() => {
                 if (localStorage.getItem('isLogin')) {
                   navigate('./write', {
-                      state: {
-                        boardName: boardName,
-                        boardId: boardId,
-                      },
+                    state: {
+                      boardName: boardName,
+                      boardId: boardId,
                     },
-                  );
+                  });
                 } else {
                   navigate('/login');
                 }
@@ -33,10 +33,6 @@ function BoardInfo({ boardName, boardId }) {
               글쓰기
             </button>
           </div>
-        </div>
-        <div className="mt-2 flex justify-between">
-          <div></div>
-          <SearchJoin />
         </div>
       </div>
     </div>
