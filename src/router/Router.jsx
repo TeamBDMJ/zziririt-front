@@ -15,6 +15,7 @@ import UpdatePost from '../page/post/UpdatePost';
 import HealthCheck from '../page/HealthCheck';
 import Support from '../page/cs/Support';
 import ApplyStreamerBoard from '../page/streamer/ApplyStreamerBoard';
+import IconShop from '../page/shop/IconShop';
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
@@ -37,6 +38,8 @@ function Router() {
           </Route>
           <Route path="streamer" element={<Streamers />}></Route>
           <Route path="streamer/apply" element={<ApplyStreamerBoard />} />
+          <Route path="iconShop" element={<IconShop />} />
+          <Route path="event" element={<IconShop />} />
         </Route>
         <Route
           path="/naverLogin"
