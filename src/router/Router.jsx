@@ -24,6 +24,7 @@ function Router() {
       <HeaderDaisy isLogin={isLogin} setIsLogin={setIsLogin} />
       <Routes>
         <Route path="/*" element={<CommonComponent />}>
+          <Route path="myProfile" element={<Profile />} />
           <Route path="g/:boardId/*" element={<BoardCommonComp />}>
             <Route path="" element={<BoardTable />} />
             <Route path=":postId" element={<DetailPost />} />
@@ -45,7 +46,6 @@ function Router() {
           path="/naverLogin"
           element={<NaverLoginRedirect setIsLogin={setIsLogin} />}
         />
-        <Route path="/myProfile" element={<Profile isLogin={isLogin} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/support" element={<Support />} />
         <Route path="/health" element={<HealthCheck />} />
