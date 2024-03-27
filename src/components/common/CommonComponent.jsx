@@ -21,7 +21,7 @@ function CommonComponent() {
       <div className="col-span-2">
         <MenuDevide title={'찌리릿'} />
       </div>
-      <div className="col-span-6 p-2">{checkMain()}</div>
+      <div className="col-span-6 p-2 min-h-[720px]">{checkMain()}</div>
       <div className="col-span-2">
         <RightSideBar />
       </div>

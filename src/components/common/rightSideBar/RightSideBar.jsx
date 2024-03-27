@@ -8,7 +8,8 @@ function RightSideBar() {
       <div className="p-4 rounded">
         <div className="mt-2 space-y-2">
           {/*<div className="flex items-center justify-between p-2 rounded">*/}
-          {/*  <h2 className="pl-3 text-2xl">인기 글 순위</h2>*/}
+          <div className="pl-3 text-2xl min-h-60">인기 글 순위</div>
+          <div>(추후 추가 예정)</div>
           {/*</div>*/}
           {/*<div>*/}
           {/*  {popularSearchKeywordData &&*/}
@@ -18,7 +19,7 @@ function RightSideBar() {
           {/*</div>*/}
         </div>
       </div>
-      {/*<Ad />*/}
+      <Ad />
     </div>
   );
 }
