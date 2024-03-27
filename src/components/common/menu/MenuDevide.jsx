@@ -43,6 +43,18 @@ function MenuDevide({ title }) {
             menuName="자유 게시판"
           />
           <MenuRow
+            onClick={() => {
+              navigate('/g/humor', {
+                state: {
+                  boardId: 3,
+                  boardName: '유머 게시판',
+                },
+              });
+            }}
+            icon={MenuIconInfo()}
+            menuName="유머 게시판"
+          />
+          <MenuRow
             onClick={() => navigate('/streamer')}
             icon={MenuIconInfo()}
             menuName="스트리머 게시판"
@@ -50,7 +62,7 @@ function MenuDevide({ title }) {
         </ul>
       </li>
       <li>
-        <h2 className="menu-title p-4"> </h2>
+        <h2 className="menu-title p-4"></h2>
         <ul>
           <MenuRow
             onClick={() => {
@@ -66,17 +78,22 @@ function MenuDevide({ title }) {
           />
           <MenuRow
             onClick={() => {
-              navigate('/iconShop');
-            }}
-            icon={MenuIconInfo()}
-            menuName="아이콘샵"
-          />
-          <MenuRow
-            onClick={() => {
               navigate('/event');
             }}
             icon={MenuIconInfo()}
             menuName="이벤트"
+          />
+        </ul>
+      </li>
+      <li>
+        <h2 className="menu-title p-4"></h2>
+        <ul>
+          <MenuRow
+            onClick={() => {
+              navigate('/iconShop');
+            }}
+            icon={MenuIconInfo()}
+            menuName="아이콘샵"
           />
           {/*<MenuRow*/}
           {/*  onClick={() => navigate('/g/ad')}*/}
