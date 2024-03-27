@@ -14,7 +14,7 @@ function sortStreamers(streamers) {
   });
 }
 
-function Streamers({ setStreamerBoardId }) {
+function Streamers() {
   const navigate = useNavigate();
   const [streamersData, setStreamersData] = useState([]);
 
@@ -35,9 +35,8 @@ function Streamers({ setStreamerBoardId }) {
       <div className="mt-1">* 본인의 게시판을 신청하고 싶다면 우측 상단 <span key="spanBold" className="font-bold">게시판 신청</span> 버튼을 눌러주세요.</div>
       <div key="streamerBoardWrapper" className="p-4 min-w-max border-2 mt-4">
         {streamersData.map((streamer) => (
-          <div>
+          <div key={streamer.boardUrl}>
             <StreamerBoardDiv
-              key={streamer.boardUrl}
               boardId={streamer.boardId}
               href={`/s/${streamer.boardUrl}`}
               streamerNickname={streamer.streamerNickname}
