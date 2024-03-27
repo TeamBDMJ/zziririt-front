@@ -13,6 +13,7 @@ import DetailPost from '../page/post/DetailPost';
 import BoardTable from '../page/board/BoardTable';
 import UpdatePost from '../page/post/UpdatePost';
 import HealthCheck from '../page/HealthCheck';
+import Support from '../page/cs/Support';
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
@@ -41,6 +42,7 @@ function Router() {
         />
         <Route path="/myProfile" element={<Profile isLogin={isLogin} />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/support" element={<Support />} />
         <Route path="/health" element={<HealthCheck />} />
       </Routes>
       <FooterDaisy />
