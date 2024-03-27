@@ -11,7 +11,7 @@ function StreamerBoardDiv({ boardId, href, streamerNickname }) {
     });
   };
 
-  return <a onClick={onTitleClickHandler}>{streamerNickname}</a>;
+  return <a onClick={onTitleClickHandler}> · <span className="text-blue-500 hover:cursor-pointer">{streamerNickname}</span></a>;
 }
 
 export default StreamerBoardDiv;

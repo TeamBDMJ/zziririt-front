@@ -27,16 +27,24 @@ function Streamers({ setStreamerBoardId }) {
 
   return (
     <div key="streamer">
-      {streamersData.map((streamer) => (
-        <div>
-          <StreamerBoardDiv
-            key={streamer.boardUrl}
-            boardId={streamer.boardId}
-            href={`/s/${streamer.boardUrl}`}
-            streamerNickname={streamer.streamerNickname}
-          />
-        </div>
-      ))}
+      <div className="flex justify-between">
+        <div className="text-4xl font-bold">스트리머 게시판</div>
+        <button onClick={() => navigate("apply")} className="btn btn-xs mt-5">게시판 신청</button>
+      </div>
+      <div className="mt-1">* 마지막 활동이 8일 이후인 게시판은 휴면상태로 변경됩니다.</div>
+      <div className="mt-1">* 본인의 게시판을 신청하고 싶다면 우측 상단 <span key="spanBold" className="font-bold">게시판 신청</span> 버튼을 눌러주세요.</div>
+      <div key="streamerBoardWrapper" className="p-4 min-w-max border-2 mt-4">
+        {streamersData.map((streamer) => (
+          <div>
+            <StreamerBoardDiv
+              key={streamer.boardUrl}
+              boardId={streamer.boardId}
+              href={`/s/${streamer.boardUrl}`}
+              streamerNickname={streamer.streamerNickname}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

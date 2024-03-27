@@ -14,6 +14,7 @@ import BoardTable from '../page/board/BoardTable';
 import UpdatePost from '../page/post/UpdatePost';
 import HealthCheck from '../page/HealthCheck';
 import Support from '../page/cs/Support';
+import ApplyStreamerBoard from '../page/streamer/ApplyStreamerBoard';
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
@@ -35,6 +36,7 @@ function Router() {
             <Route path=":postId/update" element={<UpdatePost />} />
           </Route>
           <Route path="streamer" element={<Streamers />}></Route>
+          <Route path="streamer/apply" element={<ApplyStreamerBoard />} />
         </Route>
         <Route
           path="/naverLogin"
