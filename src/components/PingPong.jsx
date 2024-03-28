@@ -9,10 +9,7 @@ export default function PingPong() {
     });
   };
   return (
-    <button
-      onClick={onClick}
-      className="btn btn-primary text-white"
-    >
+    <button onClick={onClick} className="btn btn-primary text-white">
       {data}
     </button>
   );

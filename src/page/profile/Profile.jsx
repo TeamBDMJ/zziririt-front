@@ -49,9 +49,12 @@ function Profile() {
     <div>
       <div className="text-4xl font-bold pl-4">내 정보</div>
       <div className="p-8">
-      <div>닉네임 : {myProfileData.nickname}  </div>
-      <div>내 상태 : {myProfileData.memberStatus}  </div>
-      <div>마지막 로그인 날짜 : {formatTimestamp(new Date(myProfileData.lastLogin).getTime())}  </div>
+        <div>닉네임 : {myProfileData.nickname} </div>
+        <div>내 상태 : {myProfileData.memberStatus} </div>
+        <div>
+          마지막 로그인 날짜 :{' '}
+          {formatTimestamp(new Date(myProfileData.lastLogin).getTime())}{' '}
+        </div>
       </div>
     </div>
   );
