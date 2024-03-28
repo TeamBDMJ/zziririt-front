@@ -16,6 +16,7 @@ import HealthCheck from '../page/HealthCheck';
 import Support from '../page/cs/Support';
 import ApplyStreamerBoard from '../page/streamer/ApplyStreamerBoard';
 import IconShop from '../page/shop/IconShop';
+import SuccessToApplyStreamerBoard from '../page/streamer/SuccessToApplyStreamerBoard';
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
@@ -37,8 +38,12 @@ function Router() {
             <Route path="write" element={<WritePost />} />
             <Route path=":postId/update" element={<UpdatePost />} />
           </Route>
-          <Route path="streamer" element={<Streamers />}></Route>
+          <Route path="streamer" element={<Streamers />} />
           <Route path="streamer/apply" element={<ApplyStreamerBoard />} />
+          <Route
+            path="streamer/apply/success"
+            element={<SuccessToApplyStreamerBoard />}
+          />
           <Route path="iconShop" element={<IconShop />} />
           <Route path="event" element={<IconShop />} />
         </Route>
