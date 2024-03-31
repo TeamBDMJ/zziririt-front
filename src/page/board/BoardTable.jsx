@@ -5,9 +5,14 @@ import React, { useState } from 'react';
 import SearchJoin from '../../components/features/board/SearchJoin';
 
 function BoardTable() {
-  const { boardRowsData, boardId, boardName, boardPage } = useOutletContext();
-  console.log('boardRowsData');
-  console.log(boardRowsData);
+  const {
+    boardRowsData,
+    boardId,
+    boardName,
+    boardPage,
+    setBoardRowsData,
+    setStatus,
+  } = useOutletContext();
 
   const boardRowDataContent = boardRowsData && boardRowsData.content;
   const boardRowContent = boardRowDataContent && boardRowDataContent.content;
@@ -56,7 +61,11 @@ function BoardTable() {
       </div>
       <div className="mt-2 flex justify-center">
         <div></div>
-        <SearchJoin />
+        <SearchJoin
+          boardId={boardId}
+          setBoardRowsData={setBoardRowsData}
+          setStatus={setStatus}
+        />
       </div>
     </div>
   );

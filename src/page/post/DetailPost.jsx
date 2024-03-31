@@ -1,54 +1,118 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CommentDiv from '../../components/features/post/detail/comment/CommentDiv';
 import ToastViewer from '../../components/features/post/toast/ToastViewer';
 import DetailPostTitle from '../../components/features/post/detail/DetailPostTitle';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
-  useLocation,
-  useNavigate,
-  useOutletContext,
-  useParams,
-} from 'react-router-dom';
-import { deletePost, getPost } from '../../apis/posts';
+  countZziritByPostId,
+  createPost,
+  deletePost,
+  getPost,
+  toggleZzirit,
+} from '../../apis/posts';
+import { AiFillThunderbolt, AiOutlineThunderbolt } from 'react-icons/ai';
+import CheckBox from '../../components/features/post/write/CheckBox';
+import { createComment } from '../../apis/comments';
 
 function DetailPost() {
   const location = useLocation();
-  const boardId = location.state.boardId;
-  const boardName = location.state.boardName;
-  const postId = location.state.postId;
   const navigate = useNavigate();
-  const [postData, setPostData] = useState('');
-  const [lastPostId, setLastPostId] = useState('');
+  const params = useParams();
+  const postId = params.postId;
+  const [postData, setPostData] = useState({});
+  // postData 구조
+  // blindStatus, boardId, boardName, categoryId, categoryName, commentResponses,
+  // content, createdAt, hit, memberId, nickname, permissionToDeleteStatus,
+  // permissionToUpdateStatus, postId, privateStatus, title, zziritCount, isZzirit
+  const [isZzirit, setZzirit] = useState(false);
+  const [zziritCount, setZziritCount] = useState(postData.zziritCount);
+  const [commentResponses, setCommentResponses] = useState(
+    postData.commentResponses
+  );
+
+  const [commentContent, setCommentContent] = useState('');
+  const [privateStatus, setPrivateStatus] = useState(false);
 
   const getPostDataFromApi = async () => {
-    const res = await getPost(localStorage.getItem('isLogin'), boardId, postId);
-    setPostData(res.content); // 상태 업데이트
+    const res = await getPost(localStorage.getItem('isLogin'), postId);
+    console.log(res.content);
+    setPostData(res.content);
+    setZzirit(res.content.isZzirit);
+    setZziritCount(res.content.zziritCount);
+    setCommentResponses(res.content.commentResponses);
   };
 
   useEffect(() => {
     getPostDataFromApi().then();
-    // setLastPostId(postData.postId)
-  }, [boardId, postId]);
+  }, []);
 
   const onClickUpdateHandler = async () => {
     navigate(`./update`, {
       state: {
-        boardId: boardId,
-        boardName: boardName,
-        postId: postId,
         postData: postData,
       },
     });
   };
 
   const onClickDeleteHandler = async () => {
-    const res = await deletePost(boardId, postId);
-    navigate(`${isNaN(boardId) ? '/g/' + boardId : '/s/' + boardId}`, {
-      state: {
-        boardId: boardId,
-        boardName: boardName,
-        lastPostId: postData.postId,
-      },
-    });
+    const res = await deletePost(postId);
+    alert('게시글 삭제가 완료되었습니다!');
+    window.location.href = './';
+  };
+
+  const onClickZziritHandler = async () => {
+    if (localStorage.getItem('isLogin')) {
+      const res = await toggleZzirit(postId);
+      const zziritCountRes = await countZziritByPostId(postId);
+      setZzirit(res.data.content.isZzirit);
+      setZziritCount(zziritCountRes.data.content);
+      if (isZzirit) {
+        return <AiFillThunderbolt />;
+      } else {
+        return <AiOutlineThunderbolt />;
+      }
+    } else {
+      alert('로그인이 필요한 기능입니다!');
+    }
+  };
+
+  const setZziritIcon = () => {
+    if (localStorage.getItem('isLogin')) {
+      if (isZzirit) {
+        return <AiFillThunderbolt />;
+      } else {
+        return <AiOutlineThunderbolt />;
+      }
+    }
+    return <AiOutlineThunderbolt />;
+  };
+
+  const onSubmitCommentHandler = async () => {
+    // 마크다운 형식
+    if (commentContent === '') {
+      alert('댓글을 입력해주세요!');
+      return;
+    }
+    console.log('댓글 작성 상태');
+    console.log(privateStatus);
+    const commentRequest = {
+      content: commentContent,
+      privateStatus: privateStatus,
+    };
+    const res = await createComment(postId, commentRequest);
+    getPostDataFromApi().then();
+  };
+
+  const onChangeCommentContentHandler = (e) => {
+    setCommentContent(e.target.value);
+  };
+
+  const onChangePrivateStatusHandler = (e) => {
+    if (e.target.checked) {
+      setPrivateStatus(true);
+    } else {
+      setPrivateStatus(false);
+    }
   };
 
   return (
@@ -59,22 +123,12 @@ function DetailPost() {
         <ToastViewer content={postData.content} />
       </div>
       <div className="flex justify-center">
-        <button className="btn btn-sm btn-secondary hover:btn-active mx-1 text-lg">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            />
-          </svg>
-          찌릿 {postData.zziritCount}
+        <button
+          onClick={onClickZziritHandler}
+          className="btn btn-sm btn-primary transition hover:btn-active mx-1 text-lg"
+        >
+          {setZziritIcon()}
+          찌릿 {zziritCount}
         </button>
       </div>
       <div className="flex ">
@@ -104,9 +158,37 @@ function DetailPost() {
       </div>
 
       <div id="commentWrap" className="border-gray-100 border-4 p-2 mb-10">
-        <CommentDiv data="댓글 내용(개발중)" />
-
-        <div className="p-10 border-gray-100 border-2">댓글 작성창(개발중)</div>
+        <div className="flex">
+          {/*<FaRegCommentDots  /> <div className="pl-2">댓글 {commentResponses.length}개</div>*/}
+        </div>
+        <div id="commentContentWrapper" className="space-y-2">
+          {commentResponses &&
+            commentResponses.map((comment, index) => (
+              <CommentDiv
+                comment={comment}
+                getPostDataFromApi={getPostDataFromApi}
+              />
+            ))}
+        </div>
+        <div className="p-10 border-gray-100 border-2">
+          <textarea
+            onChange={onChangeCommentContentHandler}
+            className="textarea textarea-success w-full"
+            placeholder="Bio"
+          ></textarea>
+          <div className="flex justify-between space-x-1">
+            <CheckBox
+              onChange={onChangePrivateStatusHandler}
+              text={'비밀 댓글'}
+            />
+            <button
+              className="btn btn-primary grow hover:bg-primary/90 rounded-md"
+              onClick={onSubmitCommentHandler}
+            >
+              댓글쓰기
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

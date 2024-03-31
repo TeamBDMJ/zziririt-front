@@ -8,6 +8,8 @@ function BoardRow({ index, postData, boardId, boardGName }) {
     postId,
     zzirit,
     boardName,
+    categoryId,
+    categoryName,
     title,
     memberId,
     nickname,
@@ -16,6 +18,7 @@ function BoardRow({ index, postData, boardId, boardGName }) {
     hit,
     createdAt,
   } = postData;
+
   const navigate = useNavigate();
   const d = new Date(createdAt);
   const now = Date.now();
@@ -41,13 +44,7 @@ function BoardRow({ index, postData, boardId, boardGName }) {
 
   function onClickDetailPostHandler() {
     if (permissionToRead) {
-      navigate(`./${postId}`, {
-        state: {
-          boardId: boardId,
-          boardName: boardGName,
-          postId: postId,
-        },
-      });
+      navigate(`./${postId}`);
     } else {
       alert('글을 읽을 권한이 없습니다.');
     }
@@ -55,20 +52,7 @@ function BoardRow({ index, postData, boardId, boardGName }) {
   return (
     <tr key={index} id={postId}>
       <th>{zzirit}</th>
-      <td
-        className={'cursor-pointer'}
-        onClick={() =>
-          navigate(`${isNaN(boardId) ? '/g/' + boardId : '/s/' + boardId}`, {
-            state: {
-              boardId: boardId,
-              boardName: boardGName,
-              postId: postId,
-            },
-          })
-        }
-      >
-        {boardName}
-      </td>
+      <td>{categoryName}</td>
       <td className={'cursor-pointer'} onClick={onClickDetailPostHandler}>
         {title}
       </td>

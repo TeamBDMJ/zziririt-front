@@ -1,9 +1,18 @@
-function BoardCategoryEachTab({ index, tabName }) {
-  const setTabActive = () => {
-    if (index === 0) return 'tab-active';
-  };
+function BoardCategoryEachTab({
+  categoryId,
+  onClick,
+  index,
+  tabName,
+  isTabActive,
+}) {
   return (
-    <a role="tab" className={'tab' + ` ${setTabActive()}`}>
+    <a
+      role="tab"
+      id={`${JSON.stringify({ index: index + 1, categoryId: categoryId })}`}
+      key={categoryId}
+      onClick={onClick}
+      className={'tab' + ` ${isTabActive}`}
+    >
       {tabName}
     </a>
   );

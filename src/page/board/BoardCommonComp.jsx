@@ -1,60 +1,92 @@
 import React, { useEffect, useState } from 'react';
 import BoardInfo from '../../components/features/board/BoardInfo';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { getAllPosts, getPosts } from '../../apis/posts';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { getPosts, searchPost } from '../../apis/posts';
+import { getBoardDataByBoardUrl } from '../../apis/boards';
 
 function BoardCommonComp() {
   const location = useLocation();
   const navigate = useNavigate();
-  // const [boardId, setBoardId] = useState(location.state.boardId);
-  // const [boardName, setBoardName] = useState(location.state.boardName);
-  const boardId = location.state.boardId;
-  const boardName = location.state.boardName;
-  const lastPostId = location.state.lastPostId;
-  const [boardRowsData, setBoardRowsData] = useState();
+  const params = useParams();
+  const boardUrl = params.boardUrl;
+
+  const [boardId, setBoardId] = useState(0);
+  const [boardName, setBoardName] = useState('게시판');
+  const [categories, setCategories] = useState('게시판');
+  const [categoryId, setCategoryId] = useState(0);
+
+  const [boardRowsData, setBoardRowsData] = useState({});
+
+  const [searchType, setSearchType] = useState('TITLECONT'); // TITLECONT, NICKNAME;
+  const [searchTerm, setSearchTerm] = useState('');
   const [boardPage, setBoardPage] = useState(0);
-  const [boardRowSize, setBoardRowSize] = useState(30);
-  console.log(boardId, ' ', boardName);
+  const [boardSize, setBoardSize] = useState(30);
 
   const getBoardDataFromApi = async () => {
-    let data = undefined;
-    switch (boardId) {
-      case 'all':
-        data = await getAllPosts(
-          localStorage.getItem('isLogin'),
-          boardPage,
-          boardRowSize
-        );
-        break;
-      // case 'popular':
-      //   data = (await getPopularPosts(localStorage.getItem("isLogin")));
-      //   break;
-      default:
-        data = await getPosts(
-          localStorage.getItem('isLogin'),
-          boardId,
-          boardPage,
-          boardRowSize
-        );
-        break;
-    }
-    setBoardRowsData(data); // 함수형 업데이트 사용
+    let boardData = await getBoardDataByBoardUrl(boardUrl);
+
+    setBoardId(boardData.content.boardId);
+    setBoardName(boardData.content.boardName);
+    setCategories(boardData.content.categoryList);
   };
 
+  const getBoardRowDataFromApi = async () => {
+    let data = await getPosts(
+      localStorage.getItem('isLogin'),
+      boardId,
+      boardPage,
+      boardSize
+    );
+
+    setBoardRowsData(data);
+  };
+
+  const getBoardRowDataFromSearchPostApi = async () => {
+    let data = await searchPost(
+      boardId,
+      searchType,
+      searchTerm,
+      boardPage,
+      boardSize,
+      categoryId
+    );
+
+    setBoardRowsData(data);
+  };
+
+  //주소의 boardUrl 부분이 변경되면 board 정보를 받아옵니다.
   useEffect(() => {
     getBoardDataFromApi().then();
-    console.log(boardRowsData);
-  }, [boardId, boardName, lastPostId]);
+  }, [boardUrl]);
+
+  //boardId가 변경되면 BoardRow를 받아옵니다.
+  useEffect(() => {
+    if (boardId !== 0) {
+      getBoardRowDataFromApi().then();
+    }
+  }, [boardId]);
+
+  //categoryId가 변경되면 BoardRow를 받아옵니다.
+  useEffect(() => {
+    getBoardRowDataFromSearchPostApi().then();
+  }, [categoryId]);
 
   return (
     <div className="overflow-x-auto">
-      <BoardInfo boardName={boardName} boardId={boardId} />
+      <BoardInfo
+        setCategoryId={setCategoryId}
+        boardName={boardName}
+        categories={categories}
+        boardId={boardId}
+      />
       <Outlet
         context={{
           boardRowsData,
           boardId,
           boardName,
           boardPage,
+          setBoardPage,
+          setBoardRowsData,
         }}
       />
     </div>

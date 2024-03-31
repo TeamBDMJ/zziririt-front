@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 function MenuDevide({ title }) {
   const navigate = useNavigate();
 
-  const menuList = [];
-
   return (
     <ul className="menu bg-base-200 w-auto rounded-box">
       <li>
@@ -20,36 +18,21 @@ function MenuDevide({ title }) {
           />
           <MenuRow
             onClick={() => {
-              navigate('/g/all', {
-                state: {
-                  boardId: 'all',
-                  boardName: '전체 글 보기',
-                },
-              });
+              navigate('/g/all');
             }}
             icon={MenuIconInfo()}
             menuName="전체 글 보기"
           />
           <MenuRow
             onClick={() => {
-              navigate('/g/fb', {
-                state: {
-                  boardId: 1,
-                  boardName: '자유 게시판',
-                },
-              });
+              navigate('/g/fb');
             }}
             icon={MenuIconInfo()}
             menuName="자유 게시판"
           />
           <MenuRow
             onClick={() => {
-              navigate('/g/humor', {
-                state: {
-                  boardId: 3,
-                  boardName: '유머 게시판',
-                },
-              });
+              navigate('/g/humor');
             }}
             icon={MenuIconInfo()}
             menuName="유머 게시판"
@@ -66,19 +49,14 @@ function MenuDevide({ title }) {
         <ul>
           <MenuRow
             onClick={() => {
-              navigate('/g/announcement', {
-                state: {
-                  boardId: 2,
-                  boardName: '공지사항',
-                },
-              });
+              navigate('/g/announcement');
             }}
             icon={MenuIconInfo()}
             menuName="공지사항"
           />
           <MenuRow
             onClick={() => {
-              navigate('/event');
+              navigate('/g/event');
             }}
             icon={MenuIconInfo()}
             menuName="이벤트"

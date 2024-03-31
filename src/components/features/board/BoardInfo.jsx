@@ -1,29 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BoardCategoryTab from './tab/BoardCategoryTab';
 import SearchJoin from './SearchJoin';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { getAllPosts, getPosts } from '../../../apis/posts';
+import { getChildBoards } from '../../../apis/boards';
 
-function BoardInfo({ boardName, boardId }) {
+function BoardInfo({ boardName, setCategoryId, categories, boardId }) {
+  const location = useLocation();
   const navigate = useNavigate();
   return (
     <div>
       <h1 className="text-4xl font-bold pl-4">{boardName}</h1>
       <div className="p-4">
-        <div className={boardId === 'all' ? 'hidden' : 'flex justify-between'}>
-          {/*<BoardCategoryTab*/}
-          {/*  childBoards={['home', 'dummy1', 'dummy2', 'dummy3']}*/}
-          {/*/>*/}
+        <div
+          className={
+            location.pathname === '/g/all' ? 'hidden' : 'flex justify-between'
+          }
+        >
+          <BoardCategoryTab
+            setCategoryId={setCategoryId}
+            categories={categories}
+          />
           <div></div>
           <div>
             <button
               onClick={() => {
                 if (localStorage.getItem('isLogin')) {
-                  navigate('./write', {
-                    state: {
-                      boardName: boardName,
-                      boardId: boardId,
-                    },
-                  });
+                  navigate('./write');
                 } else {
                   navigate('/login');
                 }

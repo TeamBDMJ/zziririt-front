@@ -8,14 +8,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 function UpdatePost() {
   const location = useLocation();
-  const boardId = location.state.boardId;
-  const postId = location.state.postId;
-  const boardName = location.state.boardName;
-  const oldPostData = location.state.postData;
   const navigate = useNavigate();
-  const [postData, setPostData] = useState('');
-  const [title, setTitle] = useState(oldPostData.title);
-  const [privateStatus, setPrivateStatus] = useState(oldPostData.privateStatus);
+  const [postData, setPostData] = useState(location.state.postData);
+  const [title, setTitle] = useState(postData.title);
+  const [boardId, setBoardId] = useState(postData.boardId);
+  const [postId, setPostId] = useState(postData.postId);
+  const [privateStatus, setPrivateStatus] = useState(postData.privateStatus);
+  const [content, setContent] = useState(postData.content);
+  const [categoryId, setCategoryId] = useState(postData.categoryId);
   const editorRef = useRef();
 
   const getPostDataFromApi = async () => {
@@ -25,7 +25,7 @@ function UpdatePost() {
 
   useEffect(() => {
     getPostDataFromApi().then();
-  }, [boardId, postId, privateStatus]);
+  }, []);
 
   const onSubmitHandler = async () => {
     if (title === '') {
@@ -41,13 +41,7 @@ function UpdatePost() {
     const res = await updatePost(boardId, postId, postData);
     console.log(res);
 
-    navigate(-1, {
-      state: {
-        boardId: boardId,
-        boardName: boardName,
-        lastPostId: res.data,
-      },
-    });
+    window.location.href = './';
   };
   const onExitHandler = () => {
     navigate(-1);
@@ -68,7 +62,7 @@ function UpdatePost() {
   return (
     <div>
       <div className="flex">
-        <PostSelect />
+        <PostSelect setCategoryId={setCategoryId()} categoryId={categoryId} />
         <PostTitleInput
           onChange={onChangeTitleHandler}
           placeholder="제목을 입력해주세요"
@@ -78,12 +72,12 @@ function UpdatePost() {
       <div className="flex flex-row-reverse">
         <CheckBox
           onChange={onChangePrivateStatusHandler}
-          checked={oldPostData.privateStatus}
+          checked={privateStatus}
           text={'비밀글 작성'}
         />
       </div>
       <div>
-        <ToastEditor editorRef={editorRef} content={oldPostData.content} />
+        <ToastEditor editorRef={editorRef} content={content} />
       </div>
       <div className="flex">
         <div className="flex-1"></div>

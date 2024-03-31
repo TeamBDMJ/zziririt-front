@@ -1,8 +1,8 @@
 function CheckBox({ onChange, text, checked }) {
   return (
     <div className="form-control">
-      <label className="label cursor-pointer">
-        <span className="label-text px-3">{text}</span>
+      <label className="label cursor-pointer flex space-x-1">
+        <span className="label-text">{text}</span>
         <input
           onChange={onChange}
           checked={checked}

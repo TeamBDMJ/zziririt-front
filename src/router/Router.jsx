@@ -17,6 +17,7 @@ import Support from '../page/cs/Support';
 import ApplyStreamerBoard from '../page/streamer/ApplyStreamerBoard';
 import IconShop from '../page/shop/IconShop';
 import SuccessToApplyStreamerBoard from '../page/streamer/SuccessToApplyStreamerBoard';
+import AllBoard from '../page/board/AllBoard';
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
@@ -26,7 +27,10 @@ function Router() {
       <Routes>
         <Route path="/*" element={<CommonComponent />}>
           <Route path="myProfile" element={<Profile />} />
-          <Route path="g/:boardId/*" element={<BoardCommonComp />}>
+          <Route path="g/all/*" element={<AllBoard />}>
+            <Route path="" element={<BoardTable />} />
+          </Route>
+          <Route path="g/:boardUrl/*" element={<BoardCommonComp />}>
             <Route path="" element={<BoardTable />} />
             <Route path=":postId" element={<DetailPost />} />
             <Route path="write" element={<WritePost />} />
@@ -45,7 +49,6 @@ function Router() {
             element={<SuccessToApplyStreamerBoard />}
           />
           <Route path="iconShop" element={<IconShop />} />
-          <Route path="event" element={<IconShop />} />
         </Route>
         <Route
           path="/naverLogin"

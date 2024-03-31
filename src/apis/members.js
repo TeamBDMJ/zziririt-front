@@ -1,4 +1,4 @@
-import { authInstance, instance } from './axiosInstances';
+import { authInstance } from './axiosInstances';
 
 export const getMember = async () => {
   try {

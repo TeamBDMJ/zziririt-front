@@ -1,3 +1,5 @@
+import { FaRegCommentDots, FaRegEye } from 'react-icons/fa';
+
 function DetailPostTitle({ postData }) {
   const timestamp = new Date(postData.createdAt).getTime();
 
@@ -16,13 +18,20 @@ function DetailPostTitle({ postData }) {
   return (
     <div className="px-1">
       <div className="text-3xl bg-base-200 rounded-box px-3 lg:py-3">
-        {postData.title}
+        {postData.categoryName} | {postData.title}
       </div>
-      <div className="flex justify-between px-2">
+      <div className="flex justify-between px-2 pt-2">
         <div>{formatTimestamp(timestamp)}</div>
-        <div>{postData.nickname}</div>
-        <div>조회수: {postData.hit}</div>
-        <div>찌리릿: {postData.zziritCount}</div>
+        <div>{postData.nickname}님</div>
+        <div className="flex">
+          <div className="flex pr-1">
+            <FaRegCommentDots />{' '}
+            {postData.commentResponses && postData.commentResponses.length}
+          </div>
+          <div className="flex">
+            <FaRegEye /> {postData && postData.hit}
+          </div>
+        </div>
       </div>
     </div>
   );

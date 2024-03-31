@@ -1,20 +1,38 @@
-import React, { useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { createPost } from '../../apis/posts';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { createPost, getPosts } from '../../apis/posts';
 import ToastEditor from '../../components/features/post/toast/ToastEditor';
 import CheckBox from '../../components/features/post/write/CheckBox';
 import PostSelect from '../../components/features/post/write/PostSelect';
 import PostTitleInput from '../../components/features/post/write/PostTitleInput';
+import {
+  getBoardDataByBoardUrl,
+  getCategoriesByBoardId,
+} from '../../apis/boards';
 
-export default function WritePost({ type = 'edit' }) {
-  const [title, setTitle] = useState('');
-  const editorRef = useRef();
-  const navigate = useNavigate();
+export default function WritePost() {
   const location = useLocation();
-  const boardId = location.state.boardId;
-  const boardName = location.state.boardName;
-  const postId = location.state.postId;
+  const params = useParams();
+  const navigate = useNavigate();
+  const boardUrl = params.boardUrl;
+  const editorRef = useRef();
+  const [title, setTitle] = useState('');
   const [privateStatus, setPrivateStatus] = useState(false);
+  const [boardId, setBoardId] = useState(0);
+  const [categoryId, setCategoryId] = useState(5);
+  const [categories, setCategories] = useState([]);
+
+  const getBoardDataFromApi = async () => {
+    const boardData = await getBoardDataByBoardUrl(boardUrl);
+    setBoardId(boardData.content.boardId);
+    setCategories(boardData.content.categoryList);
+    setCategoryId(boardData.content.categoryList[0].categoryId);
+  };
+
+  //주소의 boardUrl 부분이 변경되면 board 정보를 받아옵니다.
+  useEffect(() => {
+    getBoardDataFromApi().then();
+  }, [boardUrl]);
 
   const onSubmitHandler = async () => {
     // 마크다운 형식
@@ -26,16 +44,11 @@ export default function WritePost({ type = 'edit' }) {
     const postData = {
       title,
       content,
+      categoryId,
       privateStatus,
     };
     const res = await createPost(boardId, postData);
-    navigate(`${isNaN(boardId) ? '/g/' + boardId : '/s/' + boardId}`, {
-      state: {
-        boardId: boardId,
-        boardName: boardName,
-        lastPostId: res.data.content.postId,
-      },
-    });
+    window.location.href = './';
   };
   const onExitHandler = () => {
     navigate(-1);
@@ -46,8 +59,6 @@ export default function WritePost({ type = 'edit' }) {
   };
 
   const onChangePrivateStatusHandler = (e) => {
-    console.log('e.target.checked');
-    console.log(e.target.checked);
     if (e.target.checked) {
       setPrivateStatus(true);
     } else {
@@ -58,7 +69,11 @@ export default function WritePost({ type = 'edit' }) {
   return (
     <div>
       <div className="flex">
-        <PostSelect />
+        <PostSelect
+          categories={categories}
+          categoryId={categoryId}
+          setCategoryId={setCategoryId}
+        />
         <PostTitleInput
           onChange={onChangeTitleHandler}
           placeholder="제목을 입력해주세요"
