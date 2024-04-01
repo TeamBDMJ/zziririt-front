@@ -54,14 +54,23 @@ function ApplyStreamerBoard() {
     try {
       const response = await createStreamerApply(formData);
       // 성공적으로 제출되었을 때의 처리 로직 (예: 사용자에게 알림, 페이지 이동 등)
-      alert('스트리머 게시판 신청이 성공적으로 제출되었습니다!');
+      if (
+        response.response &&
+        response.response.status &&
+        (response.response.status === 500 ||
+          response.response.status === 400 ||
+          response.response.status === 403)
+      ) {
+        alert('스트리머 게시판 신청 실패! = 서버에러');
+        return;
+      }
       navigate('./success', {
         state: {
           applyUrl: applyUrl,
           applyBoardName: applyBoardName,
           file: imgFile,
         },
-      }); // 예시: 성공 페이지로 이동
+      });
     } catch (error) {
       console.error('스트리머 게시판 신청에 실패했습니다.', error);
       alert('스트리머 게시판 신청에 실패했습니다. 다시 시도해주세요.');
