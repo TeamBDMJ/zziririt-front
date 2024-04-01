@@ -10,7 +10,7 @@ function NaverLoginRedirect() {
       localStorage.setItem(key, value);
     }
     localStorage.setItem('isLogin', true);
-    navigate('/');
+    window.location.href = '/';
   }
 
   useEffect(() => {
