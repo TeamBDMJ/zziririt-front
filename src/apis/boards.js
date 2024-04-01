@@ -33,7 +33,7 @@ export const createStreamerApply = async (formData) => {
     console.log('createStreamerApply');
     const response = await authInstance.post(`/api/v1/boards/apply`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
-    })
+    });
     return response.data;
   } catch (error) {
     console.error(

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import BoardInfo from '../../components/features/board/BoardInfo';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getAllPosts, getPostByCategoryId, getPosts, searchPost } from '../../apis/posts';
+import {
+  getAllPosts,
+  getPostByCategoryId,
+  getPosts,
+  searchPost,
+} from '../../apis/posts';
 import { getBoardDataByBoardUrl } from '../../apis/boards';
 
 function BoardCommonComp() {
@@ -80,7 +85,7 @@ function BoardCommonComp() {
   useEffect(() => {
     if (boardUrl === 'all') {
       setBoardId(0);
-      setBoardName("전체 글 보기");
+      setBoardName('전체 글 보기');
       setCategories([]);
     } else {
       getBoardDataFromApi().then();
