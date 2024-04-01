@@ -19,7 +19,7 @@ export default function WritePost() {
   const [title, setTitle] = useState('');
   const [privateStatus, setPrivateStatus] = useState(false);
   const [boardId, setBoardId] = useState(0);
-  const [categoryId, setCategoryId] = useState(5);
+  const [categoryId, setCategoryId] = useState(0);
   const [categories, setCategories] = useState([]);
 
   const getBoardDataFromApi = async () => {

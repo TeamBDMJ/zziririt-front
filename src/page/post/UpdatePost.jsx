@@ -10,22 +10,24 @@ function UpdatePost() {
   const location = useLocation();
   const navigate = useNavigate();
   const [postData, setPostData] = useState(location.state.postData);
+  console.log(postData)
   const [title, setTitle] = useState(postData.title);
   const [boardId, setBoardId] = useState(postData.boardId);
   const [postId, setPostId] = useState(postData.postId);
   const [privateStatus, setPrivateStatus] = useState(postData.privateStatus);
   const [content, setContent] = useState(postData.content);
   const [categoryId, setCategoryId] = useState(postData.categoryId);
+  const [categories, setCategories] = useState([]);
   const editorRef = useRef();
 
-  const getPostDataFromApi = async () => {
-    const res = await getPost(localStorage.getItem('isLogin'), boardId, postId);
-    setPostData(res.content); // 상태 업데이트
-  };
-
-  useEffect(() => {
-    getPostDataFromApi().then();
-  }, []);
+  // const getPostDataFromApi = async () => {
+  //   const res = await getPost(localStorage.getItem('isLogin'), boardId, postId);
+  //   setPostData(res.content);
+  // };
+  //
+  // useEffect(() => {
+  //   getPostDataFromApi().then();
+  // }, []);
 
   const onSubmitHandler = async () => {
     if (title === '') {
@@ -36,11 +38,10 @@ function UpdatePost() {
     const postData = {
       title,
       content,
+      categoryId,
       privateStatus,
     };
     const res = await updatePost(boardId, postId, postData);
-    console.log(res);
-
     window.location.href = './';
   };
   const onExitHandler = () => {
@@ -62,7 +63,11 @@ function UpdatePost() {
   return (
     <div>
       <div className="flex">
-        <PostSelect setCategoryId={setCategoryId()} categoryId={categoryId} />
+        {/*<PostSelect*/}
+        {/*  categories={categories}*/}
+        {/*  categoryId={categoryId}*/}
+        {/*  setCategoryId={setCategoryId}*/}
+        {/*/>*/}
         <PostTitleInput
           onChange={onChangeTitleHandler}
           placeholder="제목을 입력해주세요"

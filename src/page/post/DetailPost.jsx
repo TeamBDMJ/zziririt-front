@@ -13,6 +13,7 @@ import {
 import { AiFillThunderbolt, AiOutlineThunderbolt } from 'react-icons/ai';
 import CheckBox from '../../components/features/post/write/CheckBox';
 import { createComment } from '../../apis/comments';
+import { FaRegCommentDots } from 'react-icons/fa';
 
 function DetailPost() {
   const location = useLocation();
@@ -158,8 +159,8 @@ function DetailPost() {
       </div>
 
       <div id="commentWrap" className="border-gray-100 border-4 p-2 mb-10">
-        <div className="flex">
-          {/*<FaRegCommentDots  /> <div className="pl-2">댓글 {commentResponses.length}개</div>*/}
+        <div className="flex" key="commentsNumberKey">
+          <FaRegCommentDots  /> <div className="pl-2">댓글 {commentResponses && commentResponses.length}개</div>
         </div>
         <div id="commentContentWrapper" className="space-y-2">
           {commentResponses &&
