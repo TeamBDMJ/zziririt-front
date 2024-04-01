@@ -33,7 +33,6 @@ function SearchJoin({
     let data = undefined;
     data = await searchPost(boardId, searchType, searchTerm, boardPage, boardSize, categoryId);
     setBoardRowsData(data);
-
   };
 
   return (
