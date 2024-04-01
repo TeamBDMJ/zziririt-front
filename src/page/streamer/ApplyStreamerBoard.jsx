@@ -27,6 +27,12 @@ function ApplyStreamerBoard() {
   };
 
   const onSubmitHandler = async () => {
+    const files = imgRef.current.files;
+
+    if (files.length === 0) {
+      return alert("인증 사진을 넣어주세요!")
+    }
+
     // FormData 인스턴스 생성
     const formData = new FormData();
 
@@ -39,17 +45,14 @@ function ApplyStreamerBoard() {
       })
     );
 
-    const files = imgRef.current.files;
-
     // 파일들을 formData에 추가
     for (let i = 0; i < files.length; i++) {
-      formData.append('image', files[i]);
+      formData.append('multipartFile', files[i]);
     }
 
     // Axios를 사용하여 서버에 FormData 전송
     try {
       const response = await createStreamerApply(formData);
-      console.log(response);
       // 성공적으로 제출되었을 때의 처리 로직 (예: 사용자에게 알림, 페이지 이동 등)
       alert('스트리머 게시판 신청이 성공적으로 제출되었습니다!');
       navigate('./success', {

@@ -30,11 +30,10 @@ export const getBoardDataByBoardUrl = async (boardUrl) => {
 
 export const createStreamerApply = async (formData) => {
   try {
+    console.log('createStreamerApply');
     const response = await authInstance.post(`/api/v1/boards/apply`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
-    });
-    console.log('createStreamerApply');
-    console.log(response);
+    })
     return response.data;
   } catch (error) {
     console.error(
