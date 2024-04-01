@@ -72,7 +72,7 @@ export const searchPost = async (
       size,
       categoryId
     );
-    // console.log(`searchPost - ${url}`);
+    console.log(`searchPost - ${url}`);
     const response = await instance.get(url);
     return response.data;
   } catch (error) {

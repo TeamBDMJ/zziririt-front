@@ -121,9 +121,16 @@ function BoardCommonComp() {
         context={{
           boardRowsData,
           boardId,
+          categoryId,
           boardName,
+          searchType,
+          setSearchType,
+          searchTerm,
+          setSearchTerm,
           boardPage,
           setBoardPage,
+          boardSize,
+          setBoardSize,
           setBoardRowsData,
         }}
       />

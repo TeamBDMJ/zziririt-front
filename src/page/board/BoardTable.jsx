@@ -1,17 +1,24 @@
 import BoardRow from '../../components/features/board/BoardRow';
 import Pagination from '../../components/features/post/Pagination';
 import { useOutletContext } from 'react-router-dom';
-import React, { useState } from 'react';
+import React from 'react';
 import SearchJoin from '../../components/features/board/SearchJoin';
 
 function BoardTable() {
   const {
     boardRowsData,
     boardId,
+    categoryId,
     boardName,
+    searchType,
+    setSearchType,
+    searchTerm,
+    setSearchTerm,
     boardPage,
+    setBoardPage,
+    boardSize,
+    setBoardSize,
     setBoardRowsData,
-    setStatus,
   } = useOutletContext();
 
   const boardRowDataContent = boardRowsData && boardRowsData.content;
@@ -54,17 +61,25 @@ function BoardTable() {
         </tbody>
       </table>
       <div className="flex justify-center">
-        <Pagination
-          pageable={boardRowDataContent && boardRowDataContent.pageable}
-          totalPages={boardRowDataContent && boardRowDataContent.totalPages}
-        />
+        {/*<Pagination*/}
+        {/*  pageable={boardRowDataContent && boardRowDataContent.pageable}*/}
+        {/*  totalPages={boardRowDataContent && boardRowDataContent.totalPages}*/}
+        {/*/>*/}
       </div>
       <div className="mt-2 flex justify-center">
         <div></div>
         <SearchJoin
           boardId={boardId}
           setBoardRowsData={setBoardRowsData}
-          setStatus={setStatus}
+          categoryId={categoryId}
+          searchType={searchType}
+          setSearchType={setSearchType}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          boardPage={boardPage}
+          setBoardPage={setBoardPage}
+          boardSize={boardSize}
+          setBoardSize={setBoardSize}
         />
       </div>
     </div>
