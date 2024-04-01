@@ -1,6 +1,5 @@
 import BoardCategoryEachTab from './BoardCategoryEachTab';
 import React, { useEffect, useState } from 'react';
-import { IoHomeOutline } from 'react-icons/io5';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function BoardCategoryTab({ categories, setCategoryId }) {

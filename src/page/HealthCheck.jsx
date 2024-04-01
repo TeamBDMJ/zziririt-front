@@ -5,6 +5,8 @@ function HealthCheck() {
   return (
     <div className="flex justify-center">
       <div>{url}</div>
+      <div>v1.0.0</div>
+      <div>2024-04-01 12:00</div>
       <PingPong />
     </div>
   );
