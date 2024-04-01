@@ -36,7 +36,6 @@ function DetailPost() {
 
   const getPostDataFromApi = async () => {
     const res = await getPost(localStorage.getItem('isLogin'), postId);
-    console.log(res.content);
     setPostData(res.content);
     setZzirit(res.content.isZzirit);
     setZziritCount(res.content.zziritCount);
@@ -89,7 +88,11 @@ function DetailPost() {
   };
 
   const onSubmitCommentHandler = async () => {
-    // 마크다운 형식
+    if (!(localStorage.getItem('isLogin'))) {
+      alert('로그인이 필요한 기능입니다!');
+      return;
+    }
+
     if (commentContent === '') {
       alert('댓글을 입력해주세요!');
       return;
