@@ -30,7 +30,7 @@ function ApplyStreamerBoard() {
     const files = imgRef.current.files;
 
     if (files.length === 0) {
-      return alert("인증 사진을 넣어주세요!")
+      return alert('인증 사진을 넣어주세요!');
     }
 
     // FormData 인스턴스 생성
