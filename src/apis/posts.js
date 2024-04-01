@@ -3,7 +3,7 @@ import { authInstance, instance } from './axiosInstances';
 export const getAllPosts = async (isLogin, page, size) => {
   try {
     const url = generatePaginationUrl(`/api/v1/boards/allposts`, page, size);
-    console.log(`getAllPosts 요청 - ${url}`);
+    // console.log(`getAllPosts 요청 - ${url}`);
     let response = undefined;
     if (isLogin) {
       response = await authInstance.get(url);
@@ -24,7 +24,7 @@ export const getPosts = async (isLogin, boardId, page, size) => {
       page,
       size
     );
-    console.log(`getPosts ${boardId}번 보드 요청 - ${url}`);
+    // console.log(`getPosts ${boardId}번 보드 요청 - ${url}`);
     let response = undefined;
     if (isLogin) {
       response = await authInstance.get(url);
@@ -41,7 +41,7 @@ export const getPosts = async (isLogin, boardId, page, size) => {
 export const getPost = async (isLogin, postId) => {
   try {
     const url = `/api/v1/boards/0/posts/${postId}`;
-    console.log(`getPost 요청 - ${url}`);
+    // console.log(`getPost 요청 - ${url}`);
     let response = undefined;
     if (isLogin) {
       response = await authInstance.get(url);
@@ -50,7 +50,7 @@ export const getPost = async (isLogin, postId) => {
     }
     return response.data;
   } catch (error) {
-    console.error('getPost-게시글을 불러오는데 실패했습니다.', error);
+    // console.error('getPost-게시글을 불러오는데 실패했습니다.', error);
     return error;
   }
 };
@@ -72,7 +72,7 @@ export const searchPost = async (
       size,
       categoryId
     );
-    console.log(`searchPost - ${url}`);
+    // console.log(`searchPost - ${url}`);
     const response = await instance.get(url);
     return response.data;
   } catch (error) {
@@ -89,7 +89,7 @@ export const getPostByCategoryId = async (boardId, page, size, categoryId) => {
       size,
       categoryId
     );
-    console.log(`getPostByCategoryId - ${url}`);
+    // console.log(`getPostByCategoryId - ${url}`);
     const response = await instance.get(url);
     return response.data;
   } catch (error) {
@@ -121,7 +121,7 @@ export const updatePost = async (boardId, postId, postData) => {
 
 export const deletePost = async (postId) => {
   try {
-    console.log('postId ', postId, ' 삭제요청');
+    // console.log('postId ', postId, ' 삭제요청');
     return await authInstance.delete(`/api/v1/boards/0/posts/${postId}`);
   } catch (error) {
     console.error('deletePost-게시글 삭제에 실패했습니다.', error);
@@ -132,7 +132,7 @@ export const deletePost = async (postId) => {
 export const toggleZzirit = async (postId) => {
   try {
     const url = `/api/v1/boards/0/posts/${postId}/zzirit`;
-    console.log(`toggleZzirit - ${url}`);
+    // console.log(`toggleZzirit - ${url}`);
     return await authInstance.post(url);
   } catch (error) {
     console.error('toggleZzirit-게시글 찌릿에 실패했습니다.', error);
@@ -143,7 +143,7 @@ export const toggleZzirit = async (postId) => {
 export const countZziritByPostId = async (postId) => {
   try {
     const url = `/api/v1/boards/0/posts/${postId}/zzirit`;
-    console.log(`countZziritByPostId - ${url}`);
+    // console.log(`countZziritByPostId - ${url}`);
     return await authInstance.get(url);
   } catch (error) {
     console.error(

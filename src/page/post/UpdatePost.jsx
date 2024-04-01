@@ -10,7 +10,6 @@ function UpdatePost() {
   const location = useLocation();
   const navigate = useNavigate();
   const [postData, setPostData] = useState(location.state.postData);
-  console.log(postData);
   const [title, setTitle] = useState(postData.title);
   const [boardId, setBoardId] = useState(postData.boardId);
   const [postId, setPostId] = useState(postData.postId);

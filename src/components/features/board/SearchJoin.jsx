@@ -24,7 +24,6 @@ function SearchJoin({ boardId, setBoardRowsData, setStatus }) {
     let data = undefined;
     data = await searchPost(searchType, searchTerm);
     setBoardRowsData(data); // 함수형 업데이트 사용
-    console.log('searchPost', data);
   };
 
   useEffect(() => {

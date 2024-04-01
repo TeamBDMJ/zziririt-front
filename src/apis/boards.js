@@ -16,7 +16,7 @@ export const getStreamerBoards = async () => {
 export const getBoardDataByBoardUrl = async (boardUrl) => {
   try {
     const url = `/api/v1/boards/search?boardUrl=${boardUrl}`;
-    console.log(`getBoardDataByBoardUrl 요청 - ${url}`);
+    // console.log(`getBoardDataByBoardUrl 요청 - ${url}`);
     const response = await instance.get(url);
     return response.data;
   } catch (error) {
@@ -30,10 +30,11 @@ export const getBoardDataByBoardUrl = async (boardUrl) => {
 
 export const createStreamerApply = async (formData) => {
   try {
-    console.log('createStreamerApply');
+    // console.log('createStreamerApply');
     const response = await authInstance.post(`/api/v1/boards/apply`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
+    alert('스트리머 게시판 신청이 성공적으로 제출되었습니다!');
     return response.data;
   } catch (error) {
     console.error(
@@ -47,7 +48,7 @@ export const createStreamerApply = async (formData) => {
 export const getCategoriesByBoardId = async (boardId) => {
   try {
     const url = `/api/v1/boards/${boardId}/categories`;
-    console.log(`getBoardDataByBoardUrl 요청 - ${url}`);
+    // console.log(`getBoardDataByBoardUrl 요청 - ${url}`);
     const response = await instance.get(url);
     return response.data;
   } catch (error) {
