@@ -88,7 +88,7 @@ function DetailPost() {
   };
 
   const onSubmitCommentHandler = async () => {
-    if (!(localStorage.getItem('isLogin'))) {
+    if (!localStorage.getItem('isLogin')) {
       alert('로그인이 필요한 기능입니다!');
       return;
     }
@@ -97,8 +97,6 @@ function DetailPost() {
       alert('댓글을 입력해주세요!');
       return;
     }
-    console.log('댓글 작성 상태');
-    console.log(privateStatus);
     const commentRequest = {
       content: commentContent,
       privateStatus: privateStatus,

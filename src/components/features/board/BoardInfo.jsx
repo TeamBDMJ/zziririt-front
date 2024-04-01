@@ -8,7 +8,6 @@ import { getChildBoards } from '../../../apis/boards';
 function BoardInfo({ boardName, setCategoryId, categories }) {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.pathname);
   return (
     <div>
       <h1 className="text-4xl font-bold pl-4">{boardName}</h1>
