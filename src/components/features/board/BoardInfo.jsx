@@ -5,16 +5,17 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getAllPosts, getPosts } from '../../../apis/posts';
 import { getChildBoards } from '../../../apis/boards';
 
-function BoardInfo({ boardName, setCategoryId, categories, boardId }) {
+function BoardInfo({ boardName, setCategoryId, categories }) {
   const location = useLocation();
   const navigate = useNavigate();
+  console.log(location.pathname)
   return (
     <div>
       <h1 className="text-4xl font-bold pl-4">{boardName}</h1>
       <div className="p-4">
         <div
           className={
-            location.pathname === '/g/all' ? 'hidden' : 'flex justify-between'
+            location.pathname.includes('/g/all') ? 'hidden' : 'flex justify-between'
           }
         >
           <BoardCategoryTab

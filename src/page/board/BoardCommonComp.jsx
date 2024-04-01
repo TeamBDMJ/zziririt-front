@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BoardInfo from '../../components/features/board/BoardInfo';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getPostByCategoryId, getPosts, searchPost } from '../../apis/posts';
+import { getAllPosts, getPostByCategoryId, getPosts, searchPost } from '../../apis/posts';
 import { getBoardDataByBoardUrl } from '../../apis/boards';
 
 function BoardCommonComp() {
@@ -42,6 +42,16 @@ function BoardCommonComp() {
     setBoardRowsData(data);
   };
 
+  const getAllBoardRowDataFromApi = async () => {
+    let data = await getAllPosts(
+      localStorage.getItem('isLogin'),
+      boardPage,
+      boardSize
+    );
+
+    setBoardRowsData(data);
+  };
+
   const getBoardRowDataFromSearchPostApi = async () => {
     let data = await searchPost(
       boardId,
@@ -68,13 +78,21 @@ function BoardCommonComp() {
 
   //주소의 boardUrl 부분이 변경되면 board 정보를 받아옵니다.
   useEffect(() => {
-    getBoardDataFromApi().then();
+    if (boardUrl === 'all') {
+      setBoardId(0);
+      setBoardName("전체 글 보기");
+      setCategories([]);
+    } else {
+      getBoardDataFromApi().then();
+    }
   }, [boardUrl]);
 
   //boardId가 변경되면 BoardRow를 받아옵니다.
   useEffect(() => {
     if (boardId !== 0) {
       getBoardRowDataFromApi().then();
+    } else {
+      getAllBoardRowDataFromApi().then();
     }
   }, [boardId]);
 
@@ -93,7 +111,6 @@ function BoardCommonComp() {
         setCategoryId={setCategoryId}
         boardName={boardName}
         categories={categories}
-        boardId={boardId}
       />
       <Outlet
         context={{

@@ -27,9 +27,6 @@ function Router() {
       <Routes>
         <Route path="/*" element={<CommonComponent />}>
           <Route path="myProfile" element={<Profile />} />
-          <Route path="g/all/*" element={<AllBoard />}>
-            <Route path="" element={<BoardTable />} />
-          </Route>
           <Route path="g/:boardUrl/*" element={<BoardCommonComp />}>
             <Route path="" element={<BoardTable />} />
             <Route path="?categoryId=:categoryId" element={<BoardTable />} />
