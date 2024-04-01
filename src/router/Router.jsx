@@ -34,7 +34,7 @@ function Router() {
             <Route path="write" element={<WritePost />} />
             <Route path=":postId/update" element={<UpdatePost />} />
           </Route>
-          <Route path="s/:streamerId/*" element={<BoardCommonComp />}>
+          <Route path="s/:boardUrl/*" element={<BoardCommonComp />}>
             <Route path="" element={<BoardTable />} />
             <Route path="?categoryId=:categoryId" element={<BoardTable />} />
             <Route path=":postId" element={<DetailPost />} />
