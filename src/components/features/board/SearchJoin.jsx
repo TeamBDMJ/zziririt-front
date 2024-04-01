@@ -1,10 +1,19 @@
 import { getAllPosts, searchPost } from '../../../apis/posts';
 import { useEffect, useState } from 'react';
 
-function SearchJoin({ boardId, setBoardRowsData, setStatus }) {
-  const [searchType, setSearchType] = useState('TITLECONT');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchData, setSearchData] = useState('');
+function SearchJoin({
+                      boardId,
+                      setBoardRowsData,
+                      categoryId,
+                      searchType,
+                      setSearchType,
+                      searchTerm,
+                      setSearchTerm,
+                      boardPage,
+                      setBoardPage,
+                      boardSize,
+                      setBoardSize,
+                    }) {
 
   const onChangeInputHandler = (e) => {
     setSearchTerm(e.target.value);
@@ -22,13 +31,9 @@ function SearchJoin({ boardId, setBoardRowsData, setStatus }) {
 
   const getBoardSearchDataFromApi = async () => {
     let data = undefined;
-    data = await searchPost(searchType, searchTerm);
-    setBoardRowsData(data); // 함수형 업데이트 사용
+    data = await searchPost(boardId, searchType, searchTerm, boardPage, boardSize, categoryId);
+    setBoardRowsData(data);
   };
-
-  useEffect(() => {
-    // getBoardSearchDataFromApi();
-  }, []);
 
   return (
     <div className="join">
@@ -38,6 +43,7 @@ function SearchJoin({ boardId, setBoardRowsData, setStatus }) {
             onChange={onChangeInputHandler}
             className="input input-bordered join-item input-sm"
             placeholder="Search"
+            value={searchTerm}
           />
         </div>
       </div>
