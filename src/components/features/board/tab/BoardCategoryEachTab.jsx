@@ -11,7 +11,7 @@ function BoardCategoryEachTab({
       id={`${JSON.stringify({ index: index + 1, categoryId: categoryId })}`}
       key={categoryId}
       onClick={onClick}
-      className={'tab' + ` ${isTabActive}`}
+      className={'hover:bg-primary/90 tab' + ` ${isTabActive}`}
     >
       {tabName}
     </a>

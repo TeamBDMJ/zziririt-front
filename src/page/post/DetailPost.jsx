@@ -160,7 +160,10 @@ function DetailPost() {
 
       <div id="commentWrap" className="border-gray-100 border-4 p-2 mb-10">
         <div className="flex" key="commentsNumberKey">
-          <FaRegCommentDots  /> <div className="pl-2">댓글 {commentResponses && commentResponses.length}개</div>
+          <FaRegCommentDots />{' '}
+          <div className="pl-2">
+            댓글 {commentResponses && commentResponses.length}개
+          </div>
         </div>
         <div id="commentContentWrapper" className="space-y-2">
           {commentResponses &&

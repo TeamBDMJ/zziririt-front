@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BoardInfo from '../../components/features/board/BoardInfo';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getPosts, searchPost } from '../../apis/posts';
+import { getPostByCategoryId, getPosts, searchPost } from '../../apis/posts';
 import { getBoardDataByBoardUrl } from '../../apis/boards';
 
 function BoardCommonComp() {
@@ -9,11 +9,12 @@ function BoardCommonComp() {
   const navigate = useNavigate();
   const params = useParams();
   const boardUrl = params.boardUrl;
+  const categoryIdParam = params.categotyId;
 
   const [boardId, setBoardId] = useState(0);
-  const [boardName, setBoardName] = useState('게시판');
-  const [categories, setCategories] = useState('게시판');
-  const [categoryId, setCategoryId] = useState(0);
+  const [boardName, setBoardName] = useState('');
+  const [categories, setCategories] = useState('');
+  const [categoryId, setCategoryId] = useState(categoryIdParam);
 
   const [boardRowsData, setBoardRowsData] = useState({});
 
@@ -54,6 +55,17 @@ function BoardCommonComp() {
     setBoardRowsData(data);
   };
 
+  const getBoardRowDataFromPostCategoryApi = async () => {
+    let data = await getPostByCategoryId(
+      boardId,
+      boardPage,
+      boardSize,
+      categoryId
+    );
+
+    setBoardRowsData(data);
+  };
+
   //주소의 boardUrl 부분이 변경되면 board 정보를 받아옵니다.
   useEffect(() => {
     getBoardDataFromApi().then();
@@ -68,7 +80,11 @@ function BoardCommonComp() {
 
   //categoryId가 변경되면 BoardRow를 받아옵니다.
   useEffect(() => {
-    getBoardRowDataFromSearchPostApi().then();
+    if (categoryId === 0) {
+      getBoardRowDataFromApi().then();
+    } else {
+      getBoardRowDataFromPostCategoryApi().then();
+    }
   }, [categoryId]);
 
   return (

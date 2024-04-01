@@ -65,7 +65,7 @@ export const searchPost = async (
 ) => {
   try {
     const url = generateSearchUrl(
-      `/api/v3/boards/${boardId}/posts/search`,
+      `/api/v1/boards/${boardId}/posts/search`,
       searchType,
       searchTerm,
       page,
@@ -73,6 +73,23 @@ export const searchPost = async (
       categoryId
     );
     console.log(`searchPost - ${url}`);
+    const response = await instance.get(url);
+    return response.data;
+  } catch (error) {
+    console.error('getPost-게시글을 불러오는데 실패했습니다.', error);
+    return error;
+  }
+};
+
+export const getPostByCategoryId = async (boardId, page, size, categoryId) => {
+  try {
+    const url = generatePaginationUrl(
+      `/api/v1/boards/${boardId}/posts/search`,
+      page,
+      size,
+      categoryId
+    );
+    console.log(`getPostByCategoryId - ${url}`);
     const response = await instance.get(url);
     return response.data;
   } catch (error) {
@@ -175,7 +192,7 @@ function generateSearchUrl(
   }
 }
 
-function generatePaginationUrl(baseUrl, page, size) {
+function generatePaginationUrl(baseUrl, page, size, categoryId) {
   let url = baseUrl;
   if (
     !(typeof page === 'undefined' || typeof page == null) ||
@@ -187,6 +204,9 @@ function generatePaginationUrl(baseUrl, page, size) {
     }
     if (!(typeof size === 'undefined' || typeof size == null)) {
       url += `size=${size}&`;
+    }
+    if (!(typeof categoryId === 'undefined' || typeof categoryId == null)) {
+      url += `categoryId=${categoryId}`;
     }
     return url;
   } else {

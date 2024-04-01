@@ -1,27 +1,42 @@
 import BoardCategoryEachTab from './BoardCategoryEachTab';
 import React, { useEffect, useState } from 'react';
 import { IoHomeOutline } from 'react-icons/io5';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function BoardCategoryTab({ categories, setCategoryId }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const params = useParams();
   const activeClassName = 'tab-active';
   const nonActiveClassName = '';
 
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  // const [activeCategoryArr, setActiveCategoryArr] = useState(
+  //   Array.isArray(categories) &&
+  //     categories.map((_, index) => {
+  //       if (index === 0) {
+  //         return activeClassName;
+  //       } else {
+  //         return nonActiveClassName;
+  //       }
+  //     })
+  // );
+  const array = new Array(categories.length + 1);
   const [activeCategoryArr, setActiveCategoryArr] = useState(
-    Array.isArray(categories) &&
-      categories.map((_, index) => {
-        if (index === 0) {
-          return activeClassName;
-        } else {
-          return nonActiveClassName;
-        }
-      })
+    Array.from({ length: categories.length }, (_, index) =>
+      index === 0 ? activeClassName : nonActiveClassName
+    )
   );
 
   const onClickTabHandler = (e) => {
     const obj = JSON.parse(e.target.id);
     setCategoryId(obj.categoryId);
-    setActiveCategoryIndex(obj.index);
+    if (obj.categoryId === 0) {
+      navigate(location.pathname);
+    } else {
+      navigate(`.?categoryId=${obj.categoryId}`);
+    }
+    // setActiveCategoryIndex(Number(obj.index)-1);
   };
 
   useEffect(() => {
@@ -29,16 +44,13 @@ function BoardCategoryTab({ categories, setCategoryId }) {
   }, [activeCategoryIndex]);
 
   const setTabActive = () => {
-    return (
-      Array.isArray(categories) &&
-      categories.map((_, index) => {
-        if (index === Number(activeCategoryIndex)) {
-          return activeClassName;
-        } else {
-          return nonActiveClassName;
-        }
-      })
-    );
+    return array.map((_, index) => {
+      if (index === Number(activeCategoryIndex)) {
+        return activeClassName;
+      } else {
+        return nonActiveClassName;
+      }
+    });
   };
 
   return (
@@ -47,9 +59,10 @@ function BoardCategoryTab({ categories, setCategoryId }) {
         role="tab"
         id={`${JSON.stringify({ index: 0, categoryId: 0 })}`}
         onClick={onClickTabHandler}
-        className={'tab' + ` ${activeCategoryArr[-1]}`}
+        className={'hover:bg-primary/90 tab' + ` ${activeCategoryArr[0]}`}
       >
-        {<IoHomeOutline />}
+        {/*<IoHomeOutline />*/}
+        all
       </a>
       {Array.isArray(categories) &&
         categories.map((category, index) => (
