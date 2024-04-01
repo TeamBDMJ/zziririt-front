@@ -178,7 +178,7 @@ function DetailPost() {
           <textarea
             onChange={onChangeCommentContentHandler}
             className="textarea textarea-success w-full"
-            placeholder="Bio"
+            placeholder="댓글 작성"
           ></textarea>
           <div className="flex justify-between space-x-1">
             <CheckBox
