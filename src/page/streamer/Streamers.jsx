@@ -34,7 +34,7 @@ function Streamers() {
         </button>
       </div>
       <div className="mt-1">
-        * 마지막 활동이 8일 이후인 게시판은 휴면상태로 변경됩니다.
+        * 마지막 활동이 8일 이상 경과된 게시판은 휴면상태로 변경됩니다
       </div>
       <div className="mt-1">
         * 본인의 게시판을 신청하고 싶다면 우측 상단{' '}
