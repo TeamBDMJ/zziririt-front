@@ -44,7 +44,7 @@ function DetailPost() {
 
   useEffect(() => {
     getPostDataFromApi().then();
-  }, []);
+  }, [postId]);
 
   const onClickUpdateHandler = async () => {
     navigate(`./update`, {

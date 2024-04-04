@@ -1,20 +1,18 @@
-import { getAllPosts, searchPost } from '../../../apis/posts';
-import { useEffect, useState } from 'react';
+import { searchPost } from '../../../apis/posts';
 
 function SearchJoin({
-                      boardId,
-                      setBoardRowsData,
-                      categoryId,
-                      searchType,
-                      setSearchType,
-                      searchTerm,
-                      setSearchTerm,
-                      boardPage,
-                      setBoardPage,
-                      boardSize,
-                      setBoardSize,
-                    }) {
-
+  boardId,
+  setBoardRowsData,
+  categoryId,
+  searchType,
+  setSearchType,
+  searchTerm,
+  setSearchTerm,
+  boardPage,
+  setBoardPage,
+  boardSize,
+  setBoardSize,
+}) {
   const onChangeInputHandler = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -31,7 +29,14 @@ function SearchJoin({
 
   const getBoardSearchDataFromApi = async () => {
     let data = undefined;
-    data = await searchPost(boardId, searchType, searchTerm, boardPage, boardSize, categoryId);
+    data = await searchPost(
+      boardId,
+      searchType,
+      searchTerm,
+      boardPage,
+      boardSize,
+      categoryId
+    );
     setBoardRowsData(data);
   };
 
